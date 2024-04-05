@@ -36,3 +36,42 @@ C:\Documenten School\2deJaar\2dZit\GameDev\GeometryWars_EvaHautecler\GeometryWar
 C:\Documenten School\2deJaar\2dZit\GameDev\GeometryWars_EvaHautecler\GeometryWars_EvaHautecler\obj\Debug\net6.0-windows\GeometryWars_EvaHautecler.pdb
 C:\Documenten School\2deJaar\2dZit\GameDev\GeometryWars_EvaHautecler\GeometryWars_EvaHautecler\obj\Debug\net6.0-windows\GeometryWars_EvaHautecler.genruntimeconfig.cache
 C:\Documenten School\2deJaar\2dZit\GameDev\GeometryWars_EvaHautecler\GeometryWars_EvaHautecler\obj\Debug\net6.0-windows\ref\GeometryWars_EvaHautecler.dll
+C:\Users\EvaHa\GameDev24\GeometryWars_EvaHautecler\GeometryWars_EvaHautecler\bin\Debug\net6.0-windows\Content\Background.xnb
+C:\Users\EvaHa\GameDev24\GeometryWars_EvaHautecler\GeometryWars_EvaHautecler\bin\Debug\net6.0-windows\GeometryWars_EvaHautecler.exe
+C:\Users\EvaHa\GameDev24\GeometryWars_EvaHautecler\GeometryWars_EvaHautecler\bin\Debug\net6.0-windows\GeometryWars_EvaHautecler.deps.json
+C:\Users\EvaHa\GameDev24\GeometryWars_EvaHautecler\GeometryWars_EvaHautecler\bin\Debug\net6.0-windows\GeometryWars_EvaHautecler.runtimeconfig.json
+C:\Users\EvaHa\GameDev24\GeometryWars_EvaHautecler\GeometryWars_EvaHautecler\bin\Debug\net6.0-windows\GeometryWars_EvaHautecler.dll
+C:\Users\EvaHa\GameDev24\GeometryWars_EvaHautecler\GeometryWars_EvaHautecler\bin\Debug\net6.0-windows\GeometryWars_EvaHautecler.pdb
+C:\Users\EvaHa\GameDev24\GeometryWars_EvaHautecler\GeometryWars_EvaHautecler\bin\Debug\net6.0-windows\Microsoft.CodeAnalysis.dll
+C:\Users\EvaHa\GameDev24\GeometryWars_EvaHautecler\GeometryWars_EvaHautecler\bin\Debug\net6.0-windows\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\EvaHa\GameDev24\GeometryWars_EvaHautecler\GeometryWars_EvaHautecler\bin\Debug\net6.0-windows\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\EvaHa\GameDev24\GeometryWars_EvaHautecler\GeometryWars_EvaHautecler\bin\Debug\net6.0-windows\MonoGame.Framework.dll
+C:\Users\EvaHa\GameDev24\GeometryWars_EvaHautecler\GeometryWars_EvaHautecler\bin\Debug\net6.0-windows\SharpDX.dll
+C:\Users\EvaHa\GameDev24\GeometryWars_EvaHautecler\GeometryWars_EvaHautecler\bin\Debug\net6.0-windows\SharpDX.Direct2D1.dll
+C:\Users\EvaHa\GameDev24\GeometryWars_EvaHautecler\GeometryWars_EvaHautecler\bin\Debug\net6.0-windows\SharpDX.Direct3D11.dll
+C:\Users\EvaHa\GameDev24\GeometryWars_EvaHautecler\GeometryWars_EvaHautecler\bin\Debug\net6.0-windows\SharpDX.Direct3D9.dll
+C:\Users\EvaHa\GameDev24\GeometryWars_EvaHautecler\GeometryWars_EvaHautecler\bin\Debug\net6.0-windows\SharpDX.DXGI.dll
+C:\Users\EvaHa\GameDev24\GeometryWars_EvaHautecler\GeometryWars_EvaHautecler\bin\Debug\net6.0-windows\SharpDX.Mathematics.dll
+C:\Users\EvaHa\GameDev24\GeometryWars_EvaHautecler\GeometryWars_EvaHautecler\bin\Debug\net6.0-windows\SharpDX.MediaFoundation.dll
+C:\Users\EvaHa\GameDev24\GeometryWars_EvaHautecler\GeometryWars_EvaHautecler\bin\Debug\net6.0-windows\SharpDX.XAudio2.dll
+C:\Users\EvaHa\GameDev24\GeometryWars_EvaHautecler\GeometryWars_EvaHautecler\bin\Debug\net6.0-windows\SharpDX.XInput.dll
+C:\Users\EvaHa\GameDev24\GeometryWars_EvaHautecler\GeometryWars_EvaHautecler\bin\Debug\net6.0-windows\runtimes\debian-x64\native\libuv.so
+C:\Users\EvaHa\GameDev24\GeometryWars_EvaHautecler\GeometryWars_EvaHautecler\bin\Debug\net6.0-windows\runtimes\fedora-x64\native\libuv.so
+C:\Users\EvaHa\GameDev24\GeometryWars_EvaHautecler\GeometryWars_EvaHautecler\bin\Debug\net6.0-windows\runtimes\opensuse-x64\native\libuv.so
+C:\Users\EvaHa\GameDev24\GeometryWars_EvaHautecler\GeometryWars_EvaHautecler\bin\Debug\net6.0-windows\runtimes\osx\native\libuv.dylib
+C:\Users\EvaHa\GameDev24\GeometryWars_EvaHautecler\GeometryWars_EvaHautecler\bin\Debug\net6.0-windows\runtimes\rhel-x64\native\libuv.so
+C:\Users\EvaHa\GameDev24\GeometryWars_EvaHautecler\GeometryWars_EvaHautecler\bin\Debug\net6.0-windows\runtimes\win7-arm\native\libuv.dll
+C:\Users\EvaHa\GameDev24\GeometryWars_EvaHautecler\GeometryWars_EvaHautecler\bin\Debug\net6.0-windows\runtimes\win7-x64\native\libuv.dll
+C:\Users\EvaHa\GameDev24\GeometryWars_EvaHautecler\GeometryWars_EvaHautecler\bin\Debug\net6.0-windows\runtimes\win7-x86\native\libuv.dll
+C:\Users\EvaHa\GameDev24\GeometryWars_EvaHautecler\GeometryWars_EvaHautecler\obj\Debug\net6.0-windows\GeometryWars_EvaHautecler.csproj.AssemblyReference.cache
+C:\Users\EvaHa\GameDev24\GeometryWars_EvaHautecler\GeometryWars_EvaHautecler\obj\Debug\net6.0-windows\GeometryWars_EvaHautecler.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\EvaHa\GameDev24\GeometryWars_EvaHautecler\GeometryWars_EvaHautecler\obj\Debug\net6.0-windows\GeometryWars_EvaHautecler.AssemblyInfoInputs.cache
+C:\Users\EvaHa\GameDev24\GeometryWars_EvaHautecler\GeometryWars_EvaHautecler\obj\Debug\net6.0-windows\GeometryWars_EvaHautecler.AssemblyInfo.cs
+C:\Users\EvaHa\GameDev24\GeometryWars_EvaHautecler\GeometryWars_EvaHautecler\obj\Debug\net6.0-windows\GeometryWars_EvaHautecler.csproj.CoreCompileInputs.cache
+C:\Users\EvaHa\GameDev24\GeometryWars_EvaHautecler\GeometryWars_EvaHautecler\obj\Debug\net6.0-windows\GeometryWars_EvaHautecler.csproj.CopyComplete
+C:\Users\EvaHa\GameDev24\GeometryWars_EvaHautecler\GeometryWars_EvaHautecler\obj\Debug\net6.0-windows\GeometryWars_EvaHautecler.dll
+C:\Users\EvaHa\GameDev24\GeometryWars_EvaHautecler\GeometryWars_EvaHautecler\obj\Debug\net6.0-windows\refint\GeometryWars_EvaHautecler.dll
+C:\Users\EvaHa\GameDev24\GeometryWars_EvaHautecler\GeometryWars_EvaHautecler\obj\Debug\net6.0-windows\GeometryWars_EvaHautecler.pdb
+C:\Users\EvaHa\GameDev24\GeometryWars_EvaHautecler\GeometryWars_EvaHautecler\obj\Debug\net6.0-windows\GeometryWars_EvaHautecler.genruntimeconfig.cache
+C:\Users\EvaHa\GameDev24\GeometryWars_EvaHautecler\GeometryWars_EvaHautecler\obj\Debug\net6.0-windows\ref\GeometryWars_EvaHautecler.dll
+C:\Users\EvaHa\GameDev24\GeometryWars_EvaHautecler\GeometryWars_EvaHautecler\bin\Debug\net6.0-windows\Content\Spaceship.xnb

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "cprnS8wCW96Bei0GtRBHRkiBZFpriddsshfFenLVS1HTxbHkB01xihmjS5O19LUNKLd5SZrnPlFJ6tpEz3YAhg==",
+  "dgSpecHash": "ij4dDFRr5MUabUpf0TSl+2861b9SLjCh3IaanDTjp3fNrV55FHIH34BXD0TFDacR4DBN4JR80QrBp24xmV1TDg==",
   "success": true,
-  "projectFilePath": "C:\\Documenten School\\2deJaar\\2dZit\\GameDev\\GeometryWars_EvaHautecler\\GeometryWars_EvaHautecler\\GeometryWars_EvaHautecler.csproj",
+  "projectFilePath": "C:\\Users\\EvaHa\\GameDev24\\GeometryWars_EvaHautecler\\GeometryWars_EvaHautecler\\GeometryWars_EvaHautecler.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\EvaHa\\.nuget\\packages\\libuv\\1.9.1\\libuv.1.9.1.nupkg.sha512",
     "C:\\Users\\EvaHa\\.nuget\\packages\\microsoft.codeanalysis.analyzers\\1.1.0\\microsoft.codeanalysis.analyzers.1.1.0.nupkg.sha512",

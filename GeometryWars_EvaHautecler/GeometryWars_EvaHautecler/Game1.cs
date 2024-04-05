@@ -9,6 +9,7 @@ namespace GeometryWars_EvaHautecler
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private Texture2D backgroundTexture;
+        private Texture2D spaceshipTexture;
 
         public Game1()
         {
@@ -30,6 +31,7 @@ namespace GeometryWars_EvaHautecler
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             backgroundTexture = Content.Load<Texture2D>("Background");
+            spaceshipTexture = Content.Load<Texture2D>("Spaceship");
 
             // TODO: use this.Content to load your game content here
         }
@@ -49,6 +51,7 @@ namespace GeometryWars_EvaHautecler
             //GraphicsDevice.Clear(Color.CornflowerBlue);
             _spriteBatch.Begin();
             _spriteBatch.Draw(backgroundTexture, new Rectangle(0, 0, 2000, 988), Color.White);
+            _spriteBatch.Draw(spaceshipTexture, new Rectangle(100, 100, 100, 100), Color.White);
             _spriteBatch.End();
 
             // TODO: Add your drawing code here

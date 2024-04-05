@@ -4,9 +4,11 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Documenten School/2deJaar/2dZit/GameDev/GeometryWars_EvaHautecler/GeometryWars_EvaHautecler/Content/Background.png</File>
+    <File>C:/Users/EvaHa/GameDev24/GeometryWars_EvaHautecler/GeometryWars_EvaHautecler/Content/Background.png</File>
+    <File>C:/Users/EvaHa/GameDev24/GeometryWars_EvaHautecler/GeometryWars_EvaHautecler/Content/Spaceship.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
   </DestFiles>
 </SourceFileCollection>

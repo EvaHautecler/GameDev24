@@ -1,2 +1,3 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"C:/Documenten School/2deJaar/2dZit/GameDev/GeometryWars_EvaHautecler/GeometryWars_EvaHautecler/Content/Background.png","C:/Documenten School/2deJaar/2dZit/GameDev/GeometryWars_EvaHautecler/GeometryWars_EvaHautecler/Content/bin/Windows/Background.xnb","TextureProcessor","Texture2DContent",21003,5440085,0,6604056
+"C:/Users/EvaHa/GameDev24/GeometryWars_EvaHautecler/GeometryWars_EvaHautecler/Content/Background.png","C:/Users/EvaHa/GameDev24/GeometryWars_EvaHautecler/GeometryWars_EvaHautecler/Content/bin/Windows/Background.xnb","TextureProcessor","Texture2DContent",21003,5440085,0,7165375
+"C:/Users/EvaHa/GameDev24/GeometryWars_EvaHautecler/GeometryWars_EvaHautecler/Content/Spaceship.png","C:/Users/EvaHa/GameDev24/GeometryWars_EvaHautecler/GeometryWars_EvaHautecler/Content/bin/Windows/Spaceship.xnb","TextureProcessor","Texture2DContent",4164,409685,0,046431

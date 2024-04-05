@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Documenten School\\2deJaar\\2dZit\\GameDev\\GeometryWars_EvaHautecler\\GeometryWars_EvaHautecler\\GeometryWars_EvaHautecler.csproj": {}
+    "C:\\Users\\EvaHa\\GameDev24\\GeometryWars_EvaHautecler\\GeometryWars_EvaHautecler\\GeometryWars_EvaHautecler.csproj": {}
   },
   "projects": {
-    "C:\\Documenten School\\2deJaar\\2dZit\\GameDev\\GeometryWars_EvaHautecler\\GeometryWars_EvaHautecler\\GeometryWars_EvaHautecler.csproj": {
+    "C:\\Users\\EvaHa\\GameDev24\\GeometryWars_EvaHautecler\\GeometryWars_EvaHautecler\\GeometryWars_EvaHautecler.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Documenten School\\2deJaar\\2dZit\\GameDev\\GeometryWars_EvaHautecler\\GeometryWars_EvaHautecler\\GeometryWars_EvaHautecler.csproj",
+        "projectUniqueName": "C:\\Users\\EvaHa\\GameDev24\\GeometryWars_EvaHautecler\\GeometryWars_EvaHautecler\\GeometryWars_EvaHautecler.csproj",
         "projectName": "GeometryWars_EvaHautecler",
-        "projectPath": "C:\\Documenten School\\2deJaar\\2dZit\\GameDev\\GeometryWars_EvaHautecler\\GeometryWars_EvaHautecler\\GeometryWars_EvaHautecler.csproj",
+        "projectPath": "C:\\Users\\EvaHa\\GameDev24\\GeometryWars_EvaHautecler\\GeometryWars_EvaHautecler\\GeometryWars_EvaHautecler.csproj",
         "packagesPath": "C:\\Users\\EvaHa\\.nuget\\packages\\",
-        "outputPath": "C:\\Documenten School\\2deJaar\\2dZit\\GameDev\\GeometryWars_EvaHautecler\\GeometryWars_EvaHautecler\\obj\\",
+        "outputPath": "C:\\Users\\EvaHa\\GameDev24\\GeometryWars_EvaHautecler\\GeometryWars_EvaHautecler\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
