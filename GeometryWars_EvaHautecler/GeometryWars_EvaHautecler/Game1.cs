@@ -1,4 +1,5 @@
 ﻿using GeometryWars_EvaHautecler.Characters;
+using GeometryWars_EvaHautecler.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -13,6 +14,7 @@ namespace GeometryWars_EvaHautecler
         private Texture2D spaceshipTexture;
 
         private Spaceship spaceship;
+        private KeyboardReader keyboardReader;
 
         public Game1()
         {
@@ -28,7 +30,8 @@ namespace GeometryWars_EvaHautecler
             // TODO: Add your initialization logic here
 
             base.Initialize();
-            spaceship = new Spaceship(spaceshipTexture);
+            keyboardReader = new KeyboardReader();
+            spaceship = new Spaceship(spaceshipTexture, keyboardReader);
         }
 
         protected override void LoadContent()
@@ -47,6 +50,7 @@ namespace GeometryWars_EvaHautecler
 
             // TODO: Add your update logic here
 
+            spaceship.Update(gameTime);
             base.Update(gameTime);
         }
 
