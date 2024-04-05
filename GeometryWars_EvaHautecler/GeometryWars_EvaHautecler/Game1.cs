@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using GeometryWars_EvaHautecler.Characters;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -10,6 +11,8 @@ namespace GeometryWars_EvaHautecler
         private SpriteBatch _spriteBatch;
         private Texture2D backgroundTexture;
         private Texture2D spaceshipTexture;
+
+        private Spaceship spaceship;
 
         public Game1()
         {
@@ -25,6 +28,7 @@ namespace GeometryWars_EvaHautecler
             // TODO: Add your initialization logic here
 
             base.Initialize();
+            spaceship = new Spaceship(spaceshipTexture);
         }
 
         protected override void LoadContent()
@@ -51,7 +55,7 @@ namespace GeometryWars_EvaHautecler
             //GraphicsDevice.Clear(Color.CornflowerBlue);
             _spriteBatch.Begin();
             _spriteBatch.Draw(backgroundTexture, new Rectangle(0, 0, 2000, 988), Color.White);
-            _spriteBatch.Draw(spaceshipTexture, new Rectangle(100, 100, 100, 100), Color.White);
+            spaceship.Draw(_spriteBatch);
             _spriteBatch.End();
 
             // TODO: Add your drawing code here
