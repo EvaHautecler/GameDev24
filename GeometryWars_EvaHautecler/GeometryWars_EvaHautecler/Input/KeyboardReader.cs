@@ -10,36 +10,63 @@ namespace GeometryWars_EvaHautecler.Input
 {
     public class KeyboardReader
     {
-        private Rectangle spaceshipRectangle;
+        //private Rectangle spaceshipRectangle;
         private float spaceshipSpeed = 2.0f;
+
+        private Dictionary<(Keys, Keys), float> keyCombinations = new Dictionary<(Keys, Keys), float>
+        {
+            {(Keys.Down, Keys.None), MathHelper.ToRadians(0f) },
+            {(Keys.Left, Keys.None), MathHelper.ToRadians(90f) },
+            {(Keys.Right,Keys.None), MathHelper.ToRadians(270f) },
+            {(Keys.Up, Keys.None), MathHelper.ToRadians(180f) },
+            {(Keys.Right, Keys.Down), MathHelper.ToRadians(315f) },
+            {(Keys.Right, Keys.Up), MathHelper.ToRadians(225f) },
+            {(Keys.Left, Keys.Down), MathHelper.ToRadians(45f) },
+            {(Keys.Left, Keys.Up), MathHelper.ToRadians(135f) }
+        };
+
+        public float CalculateAngle()
+        {
+            float angle = 0f;
+            foreach (var combination in keyCombinations)
+            {
+                if (Keyboard.GetState().IsKeyDown(combination.Key.Item1) && Keyboard.GetState().IsKeyDown(combination.Key.Item2)) 
+                {
+                    angle = combination.Value;
+                    break;
+                }
+                else if (Keyboard.GetState().IsKeyDown(combination.Key.Item1) && combination.Key.Item2 == Keys.None)
+                {
+                    angle = combination.Value;
+                }
+            }
+            return angle;
+        }
 
         public Rectangle ReadInput(Rectangle spaceshipRectangle, GameTime gameTime)
         {
-            this.spaceshipRectangle = spaceshipRectangle;
             Rectangle newSpaceship = new Rectangle(spaceshipRectangle.X, spaceshipRectangle.Y, spaceshipRectangle.Width, spaceshipRectangle.Height);
+            KeyboardState keyboardState = Keyboard.GetState();
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Left))
+            if (keyboardState.IsKeyDown(Keys.Left))
             {
                 newSpaceship.X -= (int)(spaceshipSpeed * gameTime.ElapsedGameTime.TotalSeconds * 60);
-                spaceshipRectangle.X = newSpaceship.X;
             }
-            if (Keyboard.GetState().IsKeyDown(Keys.Right))
+            if (keyboardState.IsKeyDown(Keys.Right))
             {
                 newSpaceship.X += (int)(spaceshipSpeed * gameTime.ElapsedGameTime.TotalSeconds * 60);
-                spaceshipRectangle.X = newSpaceship.X;
             }
-            if (Keyboard.GetState().IsKeyDown(Keys.Up))
+            if (keyboardState.IsKeyDown(Keys.Up))
             {
                 newSpaceship.Y -= (int)(spaceshipSpeed * gameTime.ElapsedGameTime.TotalSeconds * 60);
-                spaceshipRectangle.Y = newSpaceship.Y;
             }
-            if (Keyboard.GetState().IsKeyDown(Keys.Down))
+            if (keyboardState.IsKeyDown(Keys.Down))
             {
                 newSpaceship.Y += (int)(spaceshipSpeed * gameTime.ElapsedGameTime.TotalSeconds * 60);
-                spaceshipRectangle.Y = newSpaceship.Y;
             }
 
-            return spaceshipRectangle;
+            return newSpaceship;
         }
+
     }
 }
