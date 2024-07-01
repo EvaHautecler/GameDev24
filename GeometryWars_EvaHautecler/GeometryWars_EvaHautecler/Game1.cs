@@ -1,5 +1,6 @@
 ﻿using GeometryWars_EvaHautecler.Characters;
 using GeometryWars_EvaHautecler.Input;
+using GeometryWars_EvaHautecler.Manager;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -12,9 +13,11 @@ namespace GeometryWars_EvaHautecler
         private SpriteBatch _spriteBatch;
         private Texture2D backgroundTexture;
         private Texture2D spaceshipTexture;
+        private Texture2D spaceshipLaserTexture;
 
         private Spaceship spaceship;
         private KeyboardReader keyboardReader;
+        private LaserManager laserManager;
 
         public Game1()
         {
@@ -31,7 +34,8 @@ namespace GeometryWars_EvaHautecler
 
             base.Initialize();
             keyboardReader = new KeyboardReader();
-            spaceship = new Spaceship(spaceshipTexture, keyboardReader);
+            laserManager = new LaserManager();
+            spaceship = new Spaceship(spaceshipTexture,spaceshipLaserTexture, keyboardReader);
         }
 
         protected override void LoadContent()
@@ -39,6 +43,7 @@ namespace GeometryWars_EvaHautecler
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             backgroundTexture = Content.Load<Texture2D>("Background");
             spaceshipTexture = Content.Load<Texture2D>("Spaceship");
+            spaceshipLaserTexture = Content.Load<Texture2D>("Charge");
 
             // TODO: use this.Content to load your game content here
         }
@@ -51,6 +56,7 @@ namespace GeometryWars_EvaHautecler
             // TODO: Add your update logic here
 
             spaceship.Update(gameTime);
+            laserManager.Update(gameTime);
             base.Update(gameTime);
         }
 
@@ -60,6 +66,7 @@ namespace GeometryWars_EvaHautecler
             _spriteBatch.Begin();
             _spriteBatch.Draw(backgroundTexture, new Rectangle(0, 0, 2000, 988), Color.White);
             spaceship.Draw(_spriteBatch);
+            laserManager.Draw(_spriteBatch);
             _spriteBatch.End();
 
             // TODO: Add your drawing code here

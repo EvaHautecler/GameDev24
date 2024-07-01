@@ -5,9 +5,11 @@
   <Config />
   <SourceFiles>
     <File>C:/Users/EvaHa/GameDev24/GeometryWars_EvaHautecler/GeometryWars_EvaHautecler/Content/Background.png</File>
+    <File>C:/Users/EvaHa/GameDev24/GeometryWars_EvaHautecler/GeometryWars_EvaHautecler/Content/Charge.png</File>
     <File>C:/Users/EvaHa/GameDev24/GeometryWars_EvaHautecler/GeometryWars_EvaHautecler/Content/Spaceship.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
   </DestFiles>
