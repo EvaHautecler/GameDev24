@@ -72,14 +72,7 @@ namespace GeometryWars_EvaHautecler.Characters
             laserManager.AddLasers(laserTexture, laserRectangle, direction);
         }
 
-        /*private void Shoot()
-        {
-            float angle = keyboardReader.CalculateAngle();
-            Vector2 direction = new Vector2((float)Math.Cos(angle), -(float)Math.Sin(angle));
-            Vector2 startPosition = new Vector2(spaceshipRectangle.Center.X, spaceshipRectangle.Center.Y);
-            startPosition -= new Vector2(spaceshipRectangle.Width / 2, spaceshipRectangle.Height / 2);
-
-            laserManager.AddLasers(laserTexture, new Rectangle((int)startPosition.X, (int)startPosition.Y, 10, 3), direction);
-        }*/
+        public Rectangle Rectangle => spaceshipRectangle;
+        
     }
 }

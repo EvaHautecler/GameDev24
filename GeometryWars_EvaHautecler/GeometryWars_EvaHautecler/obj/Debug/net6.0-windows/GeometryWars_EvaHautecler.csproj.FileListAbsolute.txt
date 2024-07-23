@@ -77,3 +77,4 @@ C:\Users\EvaHa\GameDev24\GeometryWars_EvaHautecler\GeometryWars_EvaHautecler\obj
 C:\Users\EvaHa\GameDev24\GeometryWars_EvaHautecler\GeometryWars_EvaHautecler\bin\Debug\net6.0-windows\Content\Spaceship.xnb
 C:\Users\EvaHa\GameDev24\GeometryWars_EvaHautecler\GeometryWars_EvaHautecler\bin\Debug\net6.0-windows\Content\SpaceshipLaser.xnb
 C:\Users\EvaHa\GameDev24\GeometryWars_EvaHautecler\GeometryWars_EvaHautecler\bin\Debug\net6.0-windows\Content\Charge.xnb
+C:\Users\EvaHa\GameDev24\GeometryWars_EvaHautecler\GeometryWars_EvaHautecler\bin\Debug\net6.0-windows\Content\Enemy1.xnb
