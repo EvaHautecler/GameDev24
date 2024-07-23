@@ -19,7 +19,10 @@ namespace GeometryWars_EvaHautecler
         private Texture2D enemy1Texture;
 
         private Spaceship spaceship;
-        private Enemy enemy1Spaceship;
+        private List<Enemy> enemies;
+        private Random random;
+        private float enemy1SpawnCooldown = 2f;
+        private float enemy1SpawnTimer;
         private KeyboardReader keyboardReader;
         private LaserManager laserManager;
 
@@ -40,7 +43,8 @@ namespace GeometryWars_EvaHautecler
             keyboardReader = new KeyboardReader();
             laserManager = new LaserManager();
             spaceship = new Spaceship(spaceshipTexture,spaceshipLaserTexture, keyboardReader);
-            enemy1Spaceship = new Enemy(enemy1Texture, new Vector2(1000, 500), 100f);
+            random = new Random();
+            enemies = new List<Enemy>();
         }
 
         protected override void LoadContent()
@@ -63,7 +67,17 @@ namespace GeometryWars_EvaHautecler
 
             spaceship.Update(gameTime);
             laserManager.Update(gameTime);
-            enemy1Spaceship.Update(gameTime, new Vector2(spaceship.Rectangle.Center.X, spaceship.Rectangle.Center.Y));
+            enemy1SpawnTimer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+            if (enemy1SpawnTimer <= 0)
+            {
+                enemies.Add(new Enemy(enemy1Texture, 100f, random));
+                enemy1SpawnTimer = enemy1SpawnCooldown;
+            }
+
+            foreach (var enemy in enemies)
+            {
+                enemy.Update(gameTime, new Vector2(spaceship.Rectangle.Center.X, spaceship.Rectangle.Center.Y));
+            }
             base.Update(gameTime);
         }
 
@@ -74,7 +88,11 @@ namespace GeometryWars_EvaHautecler
             _spriteBatch.Draw(backgroundTexture, new Rectangle(0, 0, 2000, 988), Color.White);
             spaceship.Draw(_spriteBatch);
             laserManager.Draw(_spriteBatch);
-            enemy1Spaceship.Draw(_spriteBatch);
+
+            foreach (var enemy in enemies)
+            {
+                enemy.Draw(_spriteBatch);
+            }
             _spriteBatch.End();
 
             // TODO: Add your drawing code here
