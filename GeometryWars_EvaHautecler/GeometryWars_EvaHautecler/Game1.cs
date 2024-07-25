@@ -74,9 +74,18 @@ namespace GeometryWars_EvaHautecler
                 enemy1SpawnTimer = enemy1SpawnCooldown;
             }
 
-            foreach (var enemy in enemies)
+            for (int i = enemies.Count - 1; i >= 0; i--)
             {
-                enemy.Update(gameTime, new Vector2(spaceship.Rectangle.Center.X, spaceship.Rectangle.Center.Y));
+                enemies[i].Update(gameTime, new Vector2(spaceship.Rectangle.Center.X, spaceship.Rectangle.Center.Y));
+
+                foreach (var laser in spaceship.GetLaserManager().GetLasers())
+                {
+                    if (enemies[i].GetRectangle().Intersects(laser.LaserRectangle()))
+                    {
+                        enemies.RemoveAt(i);
+                        break;
+                    }
+                }
             }
             base.Update(gameTime);
         }

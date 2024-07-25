@@ -71,5 +71,10 @@ namespace GeometryWars_EvaHautecler.Characters
         {
             spriteBatch.Draw(enemy1Texture, enemy1Rectangle, Color.White);
         }
+
+        public Rectangle GetRectangle()
+        {
+            return enemy1Rectangle;
+        }
     }
 }

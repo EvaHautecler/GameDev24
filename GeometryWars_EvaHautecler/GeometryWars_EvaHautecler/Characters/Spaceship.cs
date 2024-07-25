@@ -74,5 +74,9 @@ namespace GeometryWars_EvaHautecler.Characters
 
         public Rectangle Rectangle => spaceshipRectangle;
         
+        public LaserManager GetLaserManager()
+        {
+            return laserManager;
+        }
     }
 }

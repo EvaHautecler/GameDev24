@@ -24,6 +24,10 @@ namespace GeometryWars_EvaHautecler.Manager
             for (int i = lasers.Count - 1; i >= 0; i--)
             {
                 lasers[i].Update();
+                if (!IsLaserOnScreen(lasers[i].LaserRectangle()))
+                {
+                    lasers.RemoveAt(i);
+                }
             }
         }
 
@@ -33,6 +37,16 @@ namespace GeometryWars_EvaHautecler.Manager
             {
                 laser.Draw(spriteBatch);
             }
+        }
+
+        public List<SpaceshipLaser> GetLasers()
+        {
+            return lasers;
+        }
+
+        private bool IsLaserOnScreen(Rectangle laserRectangle)
+        {
+            return laserRectangle.Right >= 0 && laserRectangle.Left <= 2000 && laserRectangle.Bottom >= 0 && laserRectangle.Top <= 988;
         }
     }
 }
