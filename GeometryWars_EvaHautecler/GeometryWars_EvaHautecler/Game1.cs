@@ -1,6 +1,8 @@
 ﻿using GeometryWars_EvaHautecler.Characters;
 using GeometryWars_EvaHautecler.Input;
+using GeometryWars_EvaHautecler.Interface;
 using GeometryWars_EvaHautecler.Manager;
+using GeometryWars_EvaHautecler.States;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -12,6 +14,9 @@ namespace GeometryWars_EvaHautecler
     public class Game1 : Game
     {
         private GraphicsDeviceManager _graphics;
+
+        public SpriteBatch SpriteBatch { get; private set; }
+
         private SpriteBatch _spriteBatch;
         private Texture2D backgroundTexture;
         private Texture2D spaceshipTexture;
@@ -45,6 +50,7 @@ namespace GeometryWars_EvaHautecler
             spaceship = new Spaceship(spaceshipTexture,spaceshipLaserTexture, keyboardReader);
             random = new Random();
             enemies = new List<Enemy>();
+
         }
 
         protected override void LoadContent()
@@ -92,7 +98,6 @@ namespace GeometryWars_EvaHautecler
 
         protected override void Draw(GameTime gameTime)
         {
-            //GraphicsDevice.Clear(Color.CornflowerBlue);
             _spriteBatch.Begin();
             _spriteBatch.Draw(backgroundTexture, new Rectangle(0, 0, 2000, 988), Color.White);
             spaceship.Draw(_spriteBatch);
@@ -108,5 +113,6 @@ namespace GeometryWars_EvaHautecler
 
             base.Draw(gameTime);
         }
+
     }
 }
