@@ -56,7 +56,7 @@ namespace GeometryWars_EvaHautecler.States
         {
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
-                //Add logic here
+                game.ChangeState(new MainMenuState(game));
             }
 
             spaceship.Update(gameTime);

@@ -22,7 +22,7 @@ namespace GeometryWars_EvaHautecler.States
 
         public void Enter()
         {
-            //font = game.Content.Load<SpriteFont>("Font");
+            font = game.Content.Load<SpriteFont>("File");
         }
 
         public void Exit()
@@ -33,7 +33,7 @@ namespace GeometryWars_EvaHautecler.States
         {
             if (Keyboard.GetState().IsKeyDown(Keys.Enter))
             {
-                //Add logic here
+                game.ChangeState(new MainMenuState(game));
             }
         }
 

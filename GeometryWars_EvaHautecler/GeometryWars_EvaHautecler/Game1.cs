@@ -53,6 +53,7 @@ namespace GeometryWars_EvaHautecler
             enemies = new List<Enemy>();*/
 
             ChangeState(new MainMenuState(this));
+            SpriteBatch = new SpriteBatch(GraphicsDevice);
         }
 
         protected override void LoadContent()
@@ -62,7 +63,7 @@ namespace GeometryWars_EvaHautecler
             spaceshipTexture = Content.Load<Texture2D>("Spaceship");
             spaceshipLaserTexture = Content.Load<Texture2D>("Charge");
             enemy1Texture = Content.Load<Texture2D>("Enemy1");*/
-            SpriteBatch = new SpriteBatch(GraphicsDevice);
+            
 
             // TODO: use this.Content to load your game content here
         }

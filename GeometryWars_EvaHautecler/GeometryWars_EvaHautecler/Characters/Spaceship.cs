@@ -33,7 +33,6 @@ namespace GeometryWars_EvaHautecler.Characters
 
             animation = new Animation();
             animation.GetFramesFromTextureProperties(spaceshipTexture.Width, spaceshipTexture.Height, 1, 1);
-
             laserManager = new LaserManager();
             laserTimer = laserCooldown;
         }
@@ -42,7 +41,6 @@ namespace GeometryWars_EvaHautecler.Characters
         {
             spaceshipRectangle = keyboardReader.ReadInput(spaceshipRectangle, gameTime);
             animation.Update(gameTime);
-
             laserTimer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
             if (laserTimer <= 0)
             {
@@ -55,8 +53,15 @@ namespace GeometryWars_EvaHautecler.Characters
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            //spriteBatch.Draw(spaceshipTexture, spaceshipRectangle, Color.White);
-            spriteBatch.Draw(spaceshipTexture, spaceshipRectangle,animation.CurrentFrame.SourceRectangle, Color.White, keyboardReader.CalculateAngle(), new Vector2(spaceshipTexture.Width/2, spaceshipTexture.Height/2), SpriteEffects.None, 0f);
+
+            if (animation.CurrentFrame != null)
+            {
+                spriteBatch.Draw(spaceshipTexture, spaceshipRectangle, animation.CurrentFrame.SourceRectangle, Color.White, keyboardReader.CalculateAngle(), new Vector2(spaceshipTexture.Width / 2, spaceshipTexture.Height / 2), SpriteEffects.None, 0f);
+            }
+            else
+            {
+                spriteBatch.Draw(spaceshipTexture, spaceshipRectangle, Color.White);
+            }
             laserManager.Draw(spriteBatch);
         }
 
