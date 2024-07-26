@@ -82,8 +82,8 @@ namespace GeometryWars_EvaHautecler.Characters
         public Rectangle GetCollisionRectangle()
         {
             return new Rectangle(
-                spaceshipRectangle.X + (int)collisionPadding,
-                spaceshipRectangle.Y + (int)collisionPadding,
+                spaceshipRectangle.X /*+ (int)collisionPadding*/,
+                spaceshipRectangle.Y /*+ (int)collisionPadding*/,
                 spaceshipRectangle.Width - (int)(2 * collisionPadding),
                 spaceshipRectangle.Height - (int)(2 * collisionPadding));
         }

@@ -19,6 +19,11 @@ namespace GeometryWars_EvaHautecler.Manager
             lasers.Add(laser);
         }
 
+        public void RemoveLaser(SpaceshipLaser laser)
+        {
+            lasers.Remove(laser);
+        }
+
         public void Update(GameTime gameTime)
         {
             for (int i = lasers.Count - 1; i >= 0; i--)

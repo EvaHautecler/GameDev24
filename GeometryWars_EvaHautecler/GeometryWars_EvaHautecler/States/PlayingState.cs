@@ -86,7 +86,42 @@ namespace GeometryWars_EvaHautecler.States
                 enemy1SpawnTimer = enemy1SpawnCooldown;
             }
 
-            for (int i = enemies.Count - 1; i >= 0; i--)
+            List<Enemy> enemiesToRemove = new List<Enemy>();
+            List<SpaceshipLaser> lasersToRemove = new List<SpaceshipLaser>();
+
+            foreach (var enemy in enemies)
+            {
+                enemy.Update(gameTime, new Vector2(spaceship.Rectangle.Center.X, spaceship.Rectangle.Center.Y));
+
+                foreach (var laser in spaceship.GetLaserManager().GetLasers())
+                {
+                    if (enemy.GetRectangle().Intersects(laser.LaserRectangle()))
+                    {
+                        enemiesToRemove.Add(enemy);
+                        lasersToRemove.Add(laser);
+                        score += 5;
+                        break;
+                    }
+                }
+
+                if (enemy.GetRectangle().Intersects(spaceship.GetCollisionRectangle()))
+                {
+                    isGameOver = true;
+                    break;
+                }
+            }
+
+            foreach (var laser in lasersToRemove)
+            {
+                spaceship.GetLaserManager().RemoveLaser(laser);
+            }
+
+            foreach (var enemy in enemiesToRemove)
+            {
+                enemies.Remove(enemy);
+            }
+
+            /*for (int i = enemies.Count - 1; i >= 0; i--)
             {
                 enemies[i].Update(gameTime, new Vector2(spaceship.Rectangle.Center.X, spaceship.Rectangle.Center.Y));
 
@@ -106,7 +141,9 @@ namespace GeometryWars_EvaHautecler.States
                     game.ChangeState(new GameOverState(game));
                     break;
                 }
-            }
+            }*/
+
+
         }
 
         public void Draw(GameTime gameTime)
