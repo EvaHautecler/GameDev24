@@ -28,7 +28,7 @@ namespace GeometryWars_EvaHautecler.States
 
         public void Exit() { }
 
-        public void Update()
+        public void Update(GameTime gameTime)
         {
             if (Keyboard.GetState().IsKeyDown(Keys.W))
             {

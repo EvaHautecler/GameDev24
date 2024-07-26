@@ -24,6 +24,8 @@ namespace GeometryWars_EvaHautecler.Characters
         private float laserCooldown = 0.25f;
         private float laserTimer;
 
+        private float collisionPadding = 2f;
+
         public Spaceship(Texture2D spaceshipTexture, Texture2D laserTexture, KeyboardReader keyboardReader)
         {
             this.spaceshipTexture = spaceshipTexture;
@@ -77,11 +79,22 @@ namespace GeometryWars_EvaHautecler.Characters
             laserManager.AddLasers(laserTexture, laserRectangle, direction);
         }
 
+        public Rectangle GetCollisionRectangle()
+        {
+            return new Rectangle(
+                spaceshipRectangle.X + (int)collisionPadding,
+                spaceshipRectangle.Y + (int)collisionPadding,
+                spaceshipRectangle.Width - (int)(2 * collisionPadding),
+                spaceshipRectangle.Height - (int)(2 * collisionPadding));
+        }
+
         public Rectangle Rectangle => spaceshipRectangle;
         
         public LaserManager GetLaserManager()
         {
             return laserManager;
         }
+
+        
     }
 }

@@ -31,11 +31,14 @@ namespace GeometryWars_EvaHautecler.States
         private KeyboardReader keyboardReader;
         private LaserManager laserManager;
         private bool isGameOver;
+        private int score;
+        private SpriteFont font;
 
         public PlayingState(Game1 game)
         {
             this.game = game;
             isGameOver = false;
+            score = 0;
         }
 
         public void Enter()
@@ -44,6 +47,7 @@ namespace GeometryWars_EvaHautecler.States
             spaceshipTexture = game.Content.Load<Texture2D>("Spaceship");
             spaceshipLaserTexture = game.Content.Load<Texture2D>("Charge");
             enemy1Texture = game.Content.Load<Texture2D>("Enemy1");
+            font = game.Content.Load<SpriteFont>("File");
 
             keyboardReader = new KeyboardReader();
             laserManager = new LaserManager();
@@ -67,6 +71,12 @@ namespace GeometryWars_EvaHautecler.States
                 return;
             }
 
+            if (score >= 300)
+            {
+                game.ChangeState(new GameWonState(game));
+                return;
+            }
+
             spaceship.Update(gameTime);
             laserManager.Update(gameTime);
             enemy1SpawnTimer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -85,14 +95,15 @@ namespace GeometryWars_EvaHautecler.States
                     if (enemies[i].GetRectangle().Intersects(laser.LaserRectangle()))
                     {
                         enemies.RemoveAt(i);
+                        score += 5;
                         break;
                     }
                 }
 
-                if (enemies[i].GetRectangle().Intersects(spaceship.Rectangle))
+                if (enemies[i].GetRectangle().Intersects(spaceship.GetCollisionRectangle()))
                 {
                     isGameOver = true;
-                    //game.ChangeState(new GameOverState(game));
+                    game.ChangeState(new GameOverState(game));
                     break;
                 }
             }
@@ -121,6 +132,7 @@ namespace GeometryWars_EvaHautecler.States
                 {
                    enemy.Draw(game.SpriteBatch);
                 }
+            game.SpriteBatch.DrawString(font, $"Score: {score}", new Vector2(10, 10), Color.White);
             game.SpriteBatch.End();
         }
     }
