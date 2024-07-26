@@ -38,12 +38,12 @@ namespace GeometryWars_EvaHautecler.States
         private int[] levelThresholds = { 50, 100, 150, 200 };
         private SpriteFont font;
 
-        public PlayingState(Game1 game)
+        public PlayingState(Game1 game, int initialLevel = 1)
         {
             this.game = game;
             isGameOver = false;
             score = 0;
-            currentLevel = 1;
+            currentLevel = initialLevel;
         }
 
         public void Enter()
@@ -177,17 +177,11 @@ namespace GeometryWars_EvaHautecler.States
 
         private void CheckLevelProgression()
         {
-            if (score >= levelThresholds[2] && currentLevel < 4)
+            if (currentLevel < 4 && score >= levelThresholds[currentLevel - 1])
             {
-                currentLevel = 4;
-            }
-            else if (score >= levelThresholds[1] && currentLevel < 3)
-            {
-                currentLevel = 3;
-            }
-            else if (score >= levelThresholds[0] && currentLevel < 2)
-            {
-                currentLevel = 2;
+                enemies.Clear();
+                score = 0; 
+                game.ChangeState(new LevelTransitionState(game, currentLevel + 1));
             }
         }
     }

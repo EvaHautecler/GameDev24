@@ -35,15 +35,15 @@ namespace GeometryWars_EvaHautecler.States
             timer -= gameTime.ElapsedGameTime.TotalSeconds;
             if (timer <= 0)
             {
-                game.ChangeState(new PlayingState(game));
+                game.ChangeState(new PlayingState(game, nextLevel));
             }
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public void Draw( GameTime gameTime)
         {
-            spriteBatch.Begin();
-            spriteBatch.DrawString(font, $"You are now beginning level {nextLevel}", new Vector2(100, 100), Color.White);
-            spriteBatch.End();
+            game.SpriteBatch.Begin();
+            game.SpriteBatch.DrawString(font, $"You are now beginning level {nextLevel}", new Vector2(100, 100), Color.White);
+            game.SpriteBatch.End();
         }
     }
 }
