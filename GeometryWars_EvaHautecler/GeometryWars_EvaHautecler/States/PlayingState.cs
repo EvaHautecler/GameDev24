@@ -40,6 +40,10 @@ namespace GeometryWars_EvaHautecler.States
         private int[] levelThresholds = { 50, 100, 150, 200 };
         private SpriteFont font;
 
+        private bool transitioning;
+        private float transitionTimer;
+        private const float TransitionDelay = 2f;
+
         public PlayingState(Game1 game, int initialLevel = 1)
         {
             this.game = game;
@@ -48,6 +52,8 @@ namespace GeometryWars_EvaHautecler.States
             currentLevel = initialLevel;
             maxEnemies = CalculateMaxEnemies(levelThresholds[currentLevel - 1]);
             enemiesSpawned = 0;
+            transitioning = false;
+            transitionTimer = 0;
         }
 
         public void Enter()
@@ -79,6 +85,16 @@ namespace GeometryWars_EvaHautecler.States
             if (isGameOver)
             {
                 game.ChangeState(new GameOverState(game));
+                return;
+            }
+
+            if (transitioning)
+            {
+                transitionTimer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+                if (transitionTimer <= 0)
+                {
+                    game.ChangeState(new LevelTransitionState(game, currentLevel));
+                }
                 return;
             }
 
@@ -151,6 +167,10 @@ namespace GeometryWars_EvaHautecler.States
                    enemy.Draw(game.SpriteBatch);
                 }
             game.SpriteBatch.DrawString(font, $"Score: {score}", new Vector2(10, 10), Color.White);
+            if (transitioning)
+            {
+                game.ChangeState(new LevelTransitionState(game, currentLevel ));
+            }
             game.SpriteBatch.End();
         }
 
@@ -194,7 +214,9 @@ namespace GeometryWars_EvaHautecler.States
                 currentLevel++;
                 maxEnemies = CalculateMaxEnemies(levelThresholds[currentLevel - 1]);
                 enemiesSpawned = 0;
-                game.ChangeState(new LevelTransitionState(game, currentLevel));
+                transitioning = true;
+                transitionTimer = TransitionDelay;
+                //game.ChangeState(new LevelTransitionState(game, currentLevel));
             }
         }
     }

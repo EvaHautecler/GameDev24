@@ -41,6 +41,7 @@ namespace GeometryWars_EvaHautecler.States
 
         public void Draw( GameTime gameTime)
         {
+            game.GraphicsDevice.Clear(Color.Black);
             game.SpriteBatch.Begin();
             game.SpriteBatch.DrawString(font, $"You are now beginning level {nextLevel}", new Vector2(100, 100), Color.White);
             game.SpriteBatch.End();
