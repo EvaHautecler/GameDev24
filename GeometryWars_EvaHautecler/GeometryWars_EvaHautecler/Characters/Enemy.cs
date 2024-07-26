@@ -15,12 +15,16 @@ namespace GeometryWars_EvaHautecler.Characters
         private float speed;
         private Random random;
 
-        public Enemy(Texture2D enemy1Texture, float speed, Random random)
+        private Texture2D pixelTexture;
+
+        public Enemy(Texture2D enemy1Texture, float speed, Random random, Texture2D pixelTexture)
         {
             this.enemy1Texture = enemy1Texture;
             this.speed = speed;
             //enemy1Rectangle = new Rectangle((int)initialPosition.X, (int)initialPosition.Y, 70, 70);
             this.random = random;
+
+            this.pixelTexture = pixelTexture;
 
             SpawnOutsideScreen();
         }
@@ -70,7 +74,22 @@ namespace GeometryWars_EvaHautecler.Characters
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(enemy1Texture, enemy1Rectangle, Color.White);
+
+            DrawBorder(spriteBatch, GetRectangle(), 1, Color.Blue);
         }
+
+        private void DrawBorder(SpriteBatch spriteBatch, Rectangle rectangle, int thickness, Color color)
+        {
+            // Draw top
+            spriteBatch.Draw(pixelTexture, new Rectangle(rectangle.X, rectangle.Y, rectangle.Width, thickness), color);
+            // Draw left
+            spriteBatch.Draw(pixelTexture, new Rectangle(rectangle.X, rectangle.Y, thickness, rectangle.Height), color);
+            // Draw right
+            spriteBatch.Draw(pixelTexture, new Rectangle(rectangle.X + rectangle.Width - thickness, rectangle.Y, thickness, rectangle.Height), color);
+            // Draw bottom
+            spriteBatch.Draw(pixelTexture, new Rectangle(rectangle.X, rectangle.Y + rectangle.Height - thickness, rectangle.Width, thickness), color);
+        }
+
 
         public Rectangle GetRectangle()
         {

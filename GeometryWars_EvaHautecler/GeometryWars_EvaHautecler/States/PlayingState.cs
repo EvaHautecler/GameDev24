@@ -51,7 +51,7 @@ namespace GeometryWars_EvaHautecler.States
 
             keyboardReader = new KeyboardReader();
             laserManager = new LaserManager();
-            spaceship = new Spaceship(spaceshipTexture, spaceshipLaserTexture, keyboardReader);
+            spaceship = new Spaceship(spaceshipTexture, spaceshipLaserTexture, keyboardReader, game.PixelTexture);
             random = new Random();
             enemies = new List<Enemy>();
         }
@@ -71,7 +71,7 @@ namespace GeometryWars_EvaHautecler.States
                 return;
             }
 
-            if (score >= 300)
+            if (score >= 200)
             {
                 game.ChangeState(new GameWonState(game));
                 return;
@@ -82,7 +82,7 @@ namespace GeometryWars_EvaHautecler.States
             enemy1SpawnTimer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
             if (enemy1SpawnTimer <= 0)
             {
-                enemies.Add(new Enemy(enemy1Texture, 100f, random));
+                enemies.Add(new Enemy(enemy1Texture, 100f, random, game.PixelTexture));
                 enemy1SpawnTimer = enemy1SpawnCooldown;
             }
 

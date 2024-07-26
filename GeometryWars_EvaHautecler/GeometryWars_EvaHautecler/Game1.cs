@@ -17,6 +17,8 @@ namespace GeometryWars_EvaHautecler
 
         public SpriteBatch SpriteBatch { get; private set; }
         private IGameState currentState;
+        private Texture2D pixelTexture;
+        public Texture2D PixelTexture => pixelTexture;
 
         /*private SpriteBatch _spriteBatch;
         private Texture2D backgroundTexture;
@@ -63,8 +65,9 @@ namespace GeometryWars_EvaHautecler
             spaceshipTexture = Content.Load<Texture2D>("Spaceship");
             spaceshipLaserTexture = Content.Load<Texture2D>("Charge");
             enemy1Texture = Content.Load<Texture2D>("Enemy1");*/
-            
 
+            pixelTexture = new Texture2D(GraphicsDevice, 1, 1);
+            pixelTexture.SetData(new[] { Color.White });
             // TODO: use this.Content to load your game content here
         }
 
