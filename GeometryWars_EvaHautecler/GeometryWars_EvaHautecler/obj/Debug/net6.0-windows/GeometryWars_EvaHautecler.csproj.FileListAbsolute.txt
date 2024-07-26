@@ -80,3 +80,5 @@ C:\Users\EvaHa\GameDev24\GeometryWars_EvaHautecler\GeometryWars_EvaHautecler\bin
 C:\Users\EvaHa\GameDev24\GeometryWars_EvaHautecler\GeometryWars_EvaHautecler\bin\Debug\net6.0-windows\Content\Enemy1.xnb
 C:\Users\EvaHa\GameDev24\GeometryWars_EvaHautecler\GeometryWars_EvaHautecler\bin\Debug\net6.0-windows\Content\File.xnb
 C:\Users\EvaHa\GameDev24\GeometryWars_EvaHautecler\GeometryWars_EvaHautecler\bin\Debug\net6.0-windows\Content\Font.xnb
+C:\Users\EvaHa\GameDev24\GeometryWars_EvaHautecler\GeometryWars_EvaHautecler\bin\Debug\net6.0-windows\Content\Enemy2.xnb
+C:\Users\EvaHa\GameDev24\GeometryWars_EvaHautecler\GeometryWars_EvaHautecler\bin\Debug\net6.0-windows\Content\Enemy3.xnb

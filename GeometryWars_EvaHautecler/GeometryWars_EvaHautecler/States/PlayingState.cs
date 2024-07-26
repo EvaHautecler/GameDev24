@@ -21,17 +21,22 @@ namespace GeometryWars_EvaHautecler.States
         private Texture2D backgroundTexture;
         private Texture2D spaceshipTexture;
         private Texture2D spaceshipLaserTexture;
-        private Texture2D enemy1Texture;
+        private Texture2D level1EnemyTexture;
+        private Texture2D level2EnemyTexture;
+        private Texture2D level3EnemyTexture;
+        private Texture2D level4EnemyTexture;
 
         private Spaceship spaceship;
         private List<Enemy> enemies;
         private Random random;
-        private float enemy1SpawnCooldown = 2f;
-        private float enemy1SpawnTimer;
+        private float enemySpawnCooldown = 4f;
+        private float enemySpawnTimer;
         private KeyboardReader keyboardReader;
         private LaserManager laserManager;
         private bool isGameOver;
         private int score;
+        private int currentLevel;
+        private int[] levelThresholds = { 50, 100, 150, 200 };
         private SpriteFont font;
 
         public PlayingState(Game1 game)
@@ -39,6 +44,7 @@ namespace GeometryWars_EvaHautecler.States
             this.game = game;
             isGameOver = false;
             score = 0;
+            currentLevel = 1;
         }
 
         public void Enter()
@@ -46,12 +52,14 @@ namespace GeometryWars_EvaHautecler.States
             backgroundTexture = game.Content.Load<Texture2D>("Background");
             spaceshipTexture = game.Content.Load<Texture2D>("Spaceship");
             spaceshipLaserTexture = game.Content.Load<Texture2D>("Charge");
-            enemy1Texture = game.Content.Load<Texture2D>("Enemy1");
+            level1EnemyTexture = game.Content.Load<Texture2D>("Enemy1");
+            level2EnemyTexture = game.Content.Load<Texture2D>("Enemy2");
+            level3EnemyTexture = game.Content.Load<Texture2D>("Enemy3");
             font = game.Content.Load<SpriteFont>("File");
 
             keyboardReader = new KeyboardReader();
             laserManager = new LaserManager();
-            spaceship = new Spaceship(spaceshipTexture, spaceshipLaserTexture, keyboardReader, game.PixelTexture);
+            spaceship = new Spaceship(spaceshipTexture, spaceshipLaserTexture, keyboardReader);
             random = new Random();
             enemies = new List<Enemy>();
         }
@@ -71,7 +79,7 @@ namespace GeometryWars_EvaHautecler.States
                 return;
             }
 
-            if (score >= 200)
+            if (score >= levelThresholds[3])
             {
                 game.ChangeState(new GameWonState(game));
                 return;
@@ -79,11 +87,13 @@ namespace GeometryWars_EvaHautecler.States
 
             spaceship.Update(gameTime);
             laserManager.Update(gameTime);
-            enemy1SpawnTimer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
-            if (enemy1SpawnTimer <= 0)
+            enemySpawnTimer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+            if (enemySpawnTimer <= 0)
             {
-                enemies.Add(new Enemy(enemy1Texture, 100f, random, game.PixelTexture));
-                enemy1SpawnTimer = enemy1SpawnCooldown;
+                SpawnEnemiesForLevel();
+
+                //enemies.Add(new Enemy(level1EnemyTexture, 100f, random));
+                enemySpawnTimer = enemySpawnCooldown;
             }
 
             List<Enemy> enemiesToRemove = new List<Enemy>();
@@ -121,7 +131,7 @@ namespace GeometryWars_EvaHautecler.States
                 enemies.Remove(enemy);
             }
 
-
+            CheckLevelProgression();
         }
 
         public void Draw(GameTime gameTime)
@@ -139,6 +149,47 @@ namespace GeometryWars_EvaHautecler.States
                 }
             game.SpriteBatch.DrawString(font, $"Score: {score}", new Vector2(10, 10), Color.White);
             game.SpriteBatch.End();
+        }
+
+        private void SpawnEnemiesForLevel()
+        {
+            int enemyCount = 1 + currentLevel;
+            for (int i = 0; i < enemyCount; i++)
+            {
+                switch (currentLevel)
+                {
+                    case 1:
+                        enemies.Add(new Level1Enemy(level1EnemyTexture, 100f, random));
+                        break;
+                    case 2:
+                        enemies.Add(new Level2Enemy(level2EnemyTexture, 120f, random));
+                        break;
+                    case 3:
+                        enemies.Add(new Level3Enemy(level3EnemyTexture, 140f, random));
+                        break;
+                    case 4:
+                        enemies.Add(new Level1Enemy(level1EnemyTexture, 100f, random));
+                        enemies.Add(new Level2Enemy(level2EnemyTexture, 120f, random));
+                        enemies.Add(new Level3Enemy(level3EnemyTexture, 140f, random));
+                        break;
+                }
+            }
+        }
+
+        private void CheckLevelProgression()
+        {
+            if (score >= levelThresholds[2] && currentLevel < 4)
+            {
+                currentLevel = 4;
+            }
+            else if (score >= levelThresholds[1] && currentLevel < 3)
+            {
+                currentLevel = 3;
+            }
+            else if (score >= levelThresholds[0] && currentLevel < 2)
+            {
+                currentLevel = 2;
+            }
         }
     }
 }
