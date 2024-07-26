@@ -14,6 +14,7 @@ namespace GeometryWars_EvaHautecler.States
     {
         private Game1 game;
         private SpriteFont font;
+        private string gameOverMessage = "Game Over! Press M to Return to Main Menu";
 
         public GameOverState(Game1 game)
         {
@@ -31,7 +32,7 @@ namespace GeometryWars_EvaHautecler.States
 
         public void Update(GameTime gameTime)
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.Enter))
+            if (Keyboard.GetState().IsKeyDown(Keys.M))
             {
                 game.ChangeState(new MainMenuState(game));
             }
@@ -41,7 +42,8 @@ namespace GeometryWars_EvaHautecler.States
         {
             game.GraphicsDevice.Clear(Color.Black);
             game.SpriteBatch.Begin();
-            game.SpriteBatch.DrawString(font, "Game Over! Press Enter to Return to Main Menu", new Vector2(100, 100), Color.White);
+            var messageSize = font.MeasureString(gameOverMessage);
+            game.SpriteBatch.DrawString(font, gameOverMessage, new Vector2((game.GraphicsDevice.Viewport.Width - messageSize.X) / 2, (game.GraphicsDevice.Viewport.Height - messageSize.Y) / 2), Color.Red);
             game.SpriteBatch.End();
         }
     }

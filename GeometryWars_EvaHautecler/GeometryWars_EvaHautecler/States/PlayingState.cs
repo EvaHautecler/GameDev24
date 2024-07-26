@@ -30,10 +30,12 @@ namespace GeometryWars_EvaHautecler.States
         private float enemy1SpawnTimer;
         private KeyboardReader keyboardReader;
         private LaserManager laserManager;
+        private bool isGameOver;
 
         public PlayingState(Game1 game)
         {
             this.game = game;
+            isGameOver = false;
         }
 
         public void Enter()
@@ -59,6 +61,12 @@ namespace GeometryWars_EvaHautecler.States
                 game.ChangeState(new MainMenuState(game));
             }
 
+            if (isGameOver)
+            {
+                game.ChangeState(new GameOverState(game));
+                return;
+            }
+
             spaceship.Update(gameTime);
             laserManager.Update(gameTime);
             enemy1SpawnTimer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -80,6 +88,13 @@ namespace GeometryWars_EvaHautecler.States
                         break;
                     }
                 }
+
+                if (enemies[i].GetRectangle().Intersects(spaceship.Rectangle))
+                {
+                    isGameOver = true;
+                    //game.ChangeState(new GameOverState(game));
+                    break;
+                }
             }
         }
 
@@ -87,13 +102,25 @@ namespace GeometryWars_EvaHautecler.States
         {
             game.SpriteBatch.Begin();
             game.SpriteBatch.Draw(backgroundTexture, new Rectangle(0, 0, 2000, 988), Color.White);
-            spaceship.Draw(game.SpriteBatch);
-            laserManager.Draw(game.SpriteBatch);
 
-            foreach (var enemy in enemies)
+            /*if (isGameOver)
             {
-                enemy.Draw(game.SpriteBatch);
+                var font = game.Content.Load<SpriteFont>("File");
+                var message = "Game Over";
+                var messageSize = font.MeasureString(message);
+                game.SpriteBatch.DrawString(font, message, new Vector2((game.GraphicsDevice.Viewport.Width - messageSize.X) / 2, (game.GraphicsDevice.Viewport.Height - messageSize.Y) / 2), Color.Red);
             }
+            else
+            {
+            }*/
+
+                spaceship.Draw(game.SpriteBatch);
+                laserManager.Draw(game.SpriteBatch);
+
+                foreach (var enemy in enemies)
+                {
+                   enemy.Draw(game.SpriteBatch);
+                }
             game.SpriteBatch.End();
         }
     }
