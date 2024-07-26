@@ -10,21 +10,17 @@ namespace GeometryWars_EvaHautecler.Characters
 {
     public class Enemy
     {
-        private Texture2D enemy1Texture;
-        private Rectangle enemy1Rectangle;
+        private Texture2D enemyTexture;
+        private Rectangle enemyRectangle;
         private float speed;
         private Random random;
 
-        private Texture2D pixelTexture;
-
-        public Enemy(Texture2D enemy1Texture, float speed, Random random, Texture2D pixelTexture)
+        public Enemy(Texture2D enemyTexture, float speed, Random random)
         {
-            this.enemy1Texture = enemy1Texture;
+            this.enemyTexture = enemyTexture;
             this.speed = speed;
             //enemy1Rectangle = new Rectangle((int)initialPosition.X, (int)initialPosition.Y, 70, 70);
             this.random = random;
-
-            this.pixelTexture = pixelTexture;
 
             SpawnOutsideScreen();
         }
@@ -41,14 +37,14 @@ namespace GeometryWars_EvaHautecler.Characters
             {
                 case 0:
                     x = random.Next(screenWidth);
-                    y = -enemy1Texture.Height;
+                    y = -enemyTexture.Height;
                     break;
                 case 1:
                     x = random.Next(screenWidth);
                     y = screenHeight;
                     break;
                 case 2: // Left
-                    x = -enemy1Texture.Width;
+                    x = -enemyTexture.Width;
                     y = random.Next(screenHeight);
                     break;
                 case 3: // Right
@@ -57,43 +53,27 @@ namespace GeometryWars_EvaHautecler.Characters
                     break;
             }
 
-            enemy1Rectangle = new Rectangle(x, y, 70, 70);
+            enemyRectangle = new Rectangle(x, y, 70, 70);
         }
 
         public void Update(GameTime gameTime, Vector2 heroPosition)
         {
-            Vector2 enemy1Position = new Vector2(enemy1Rectangle.X, enemy1Rectangle.Y);
-            Vector2 direction = heroPosition - enemy1Position;
+            Vector2 enemyPosition = new Vector2(enemyRectangle.X, enemyRectangle.Y);
+            Vector2 direction = heroPosition - enemyPosition;
             direction.Normalize();
 
-            enemy1Position += direction * speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
-            enemy1Rectangle.X = (int)enemy1Position.X;
-            enemy1Rectangle.Y = (int)enemy1Position.Y;
+            enemyPosition += direction * speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            enemyRectangle.X = (int)enemyPosition.X;
+            enemyRectangle.Y = (int)enemyPosition.Y;
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(enemy1Texture, enemy1Rectangle, Color.White);
-
-            DrawBorder(spriteBatch, GetRectangle(), 1, Color.Blue);
+            spriteBatch.Draw(enemyTexture, enemyRectangle, Color.White);
         }
-
-        private void DrawBorder(SpriteBatch spriteBatch, Rectangle rectangle, int thickness, Color color)
-        {
-            // Draw top
-            spriteBatch.Draw(pixelTexture, new Rectangle(rectangle.X, rectangle.Y, rectangle.Width, thickness), color);
-            // Draw left
-            spriteBatch.Draw(pixelTexture, new Rectangle(rectangle.X, rectangle.Y, thickness, rectangle.Height), color);
-            // Draw right
-            spriteBatch.Draw(pixelTexture, new Rectangle(rectangle.X + rectangle.Width - thickness, rectangle.Y, thickness, rectangle.Height), color);
-            // Draw bottom
-            spriteBatch.Draw(pixelTexture, new Rectangle(rectangle.X, rectangle.Y + rectangle.Height - thickness, rectangle.Width, thickness), color);
-        }
-
-
         public Rectangle GetRectangle()
         {
-            return enemy1Rectangle;
+            return enemyRectangle;
         }
     }
 }

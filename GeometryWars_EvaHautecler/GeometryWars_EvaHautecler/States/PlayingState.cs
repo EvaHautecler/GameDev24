@@ -121,28 +121,6 @@ namespace GeometryWars_EvaHautecler.States
                 enemies.Remove(enemy);
             }
 
-            /*for (int i = enemies.Count - 1; i >= 0; i--)
-            {
-                enemies[i].Update(gameTime, new Vector2(spaceship.Rectangle.Center.X, spaceship.Rectangle.Center.Y));
-
-                foreach (var laser in spaceship.GetLaserManager().GetLasers())
-                {
-                    if (enemies[i].GetRectangle().Intersects(laser.LaserRectangle()))
-                    {
-                        enemies.RemoveAt(i);
-                        score += 5;
-                        break;
-                    }
-                }
-
-                if (enemies[i].GetRectangle().Intersects(spaceship.GetCollisionRectangle()))
-                {
-                    isGameOver = true;
-                    game.ChangeState(new GameOverState(game));
-                    break;
-                }
-            }*/
-
 
         }
 
@@ -151,16 +129,6 @@ namespace GeometryWars_EvaHautecler.States
             game.SpriteBatch.Begin();
             game.SpriteBatch.Draw(backgroundTexture, new Rectangle(0, 0, 2000, 988), Color.White);
 
-            /*if (isGameOver)
-            {
-                var font = game.Content.Load<SpriteFont>("File");
-                var message = "Game Over";
-                var messageSize = font.MeasureString(message);
-                game.SpriteBatch.DrawString(font, message, new Vector2((game.GraphicsDevice.Viewport.Width - messageSize.X) / 2, (game.GraphicsDevice.Viewport.Height - messageSize.Y) / 2), Color.Red);
-            }
-            else
-            {
-            }*/
 
                 spaceship.Draw(game.SpriteBatch);
                 laserManager.Draw(game.SpriteBatch);
