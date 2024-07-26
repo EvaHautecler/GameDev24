@@ -11,7 +11,7 @@ namespace GeometryWars_EvaHautecler.Input
 {
     public class KeyboardReader
     {
-        private float spaceshipSpeed = 2.0f;
+        private float spaceshipSpeed = 2.5f;
 
 
 

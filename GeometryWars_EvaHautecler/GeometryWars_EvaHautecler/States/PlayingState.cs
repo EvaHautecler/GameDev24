@@ -24,7 +24,6 @@ namespace GeometryWars_EvaHautecler.States
         private Texture2D level1EnemyTexture;
         private Texture2D level2EnemyTexture;
         private Texture2D level3EnemyTexture;
-        private Texture2D level4EnemyTexture;
 
         private Spaceship spaceship;
         private List<Enemy> enemies;
