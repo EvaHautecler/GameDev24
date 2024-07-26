@@ -71,6 +71,17 @@ namespace GeometryWars_EvaHautecler.Characters
         {
             spriteBatch.Draw(enemyTexture, enemyRectangle, Color.White);
         }
+
+        public Rectangle GetCollisionRectangle()
+        {
+            int padding = 10;
+            return new Rectangle(
+                enemyRectangle.X + padding,
+                enemyRectangle.Y + padding,
+                enemyRectangle.Width - 2 * padding,
+                enemyRectangle.Height - 2 * padding);
+        }
+
         public Rectangle GetRectangle()
         {
             return enemyRectangle;

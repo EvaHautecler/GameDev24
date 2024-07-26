@@ -28,8 +28,10 @@ namespace GeometryWars_EvaHautecler.States
         private Spaceship spaceship;
         private List<Enemy> enemies;
         private Random random;
-        private float enemySpawnCooldown = 4f;
+        private float enemySpawnCooldown = 3.5f;
         private float enemySpawnTimer;
+        private int enemiesSpawned;
+        private int maxEnemies;
         private KeyboardReader keyboardReader;
         private LaserManager laserManager;
         private bool isGameOver;
@@ -44,6 +46,8 @@ namespace GeometryWars_EvaHautecler.States
             isGameOver = false;
             score = 0;
             currentLevel = initialLevel;
+            maxEnemies = CalculateMaxEnemies(levelThresholds[currentLevel - 1]);
+            enemiesSpawned = 0;
         }
 
         public void Enter()
@@ -87,7 +91,7 @@ namespace GeometryWars_EvaHautecler.States
             spaceship.Update(gameTime);
             laserManager.Update(gameTime);
             enemySpawnTimer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
-            if (enemySpawnTimer <= 0)
+            if (enemySpawnTimer <= 0 && enemiesSpawned < maxEnemies && enemies.Count < maxEnemies)
             {
                 SpawnEnemiesForLevel();
 
@@ -153,7 +157,7 @@ namespace GeometryWars_EvaHautecler.States
         private void SpawnEnemiesForLevel()
         {
             int enemyCount = 1 + currentLevel;
-            for (int i = 0; i < enemyCount; i++)
+            for (int i = 0; i < enemyCount && enemiesSpawned < maxEnemies; i++)
             {
                 switch (currentLevel)
                 {
@@ -172,7 +176,13 @@ namespace GeometryWars_EvaHautecler.States
                         enemies.Add(new Level3Enemy(level3EnemyTexture, 140f, random));
                         break;
                 }
+                enemiesSpawned++;
             }
+        }
+
+        private int CalculateMaxEnemies(int levelThreshold)
+        {
+            return levelThreshold / 5;
         }
 
         private void CheckLevelProgression()
@@ -180,8 +190,11 @@ namespace GeometryWars_EvaHautecler.States
             if (currentLevel < 4 && score >= levelThresholds[currentLevel - 1])
             {
                 enemies.Clear();
-                score = 0; 
-                game.ChangeState(new LevelTransitionState(game, currentLevel + 1));
+                score = 0;
+                currentLevel++;
+                maxEnemies = CalculateMaxEnemies(levelThresholds[currentLevel - 1]);
+                enemiesSpawned = 0;
+                game.ChangeState(new LevelTransitionState(game, currentLevel));
             }
         }
     }

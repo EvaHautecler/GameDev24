@@ -30,7 +30,7 @@ namespace GeometryWars_EvaHautecler.Characters
             this.laserTexture = laserTexture;
             this.keyboardReader = keyboardReader;
 
-            spaceshipRectangle = new Rectangle(100, 100, 70, 70);
+            spaceshipRectangle = new Rectangle(1000, 494, 70, 70);
 
             animation = new Animation();
             animation.GetFramesFromTextureProperties(spaceshipTexture.Width, spaceshipTexture.Height, 1, 1);

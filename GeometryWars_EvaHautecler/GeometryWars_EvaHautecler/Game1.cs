@@ -18,19 +18,6 @@ namespace GeometryWars_EvaHautecler
         public SpriteBatch SpriteBatch { get; private set; }
         private IGameState currentState;
 
-        /*private SpriteBatch _spriteBatch;
-        private Texture2D backgroundTexture;
-        private Texture2D spaceshipTexture;
-        private Texture2D spaceshipLaserTexture;
-        private Texture2D enemy1Texture;
-
-        private Spaceship spaceship;
-        private List<Enemy> enemies;
-        private Random random;
-        private float enemy1SpawnCooldown = 2f;
-        private float enemy1SpawnTimer;
-        private KeyboardReader keyboardReader;
-        private LaserManager laserManager;*/
 
         public Game1()
         {
@@ -46,11 +33,6 @@ namespace GeometryWars_EvaHautecler
             // TODO: Add your initialization logic here
 
             base.Initialize();
-            /*keyboardReader = new KeyboardReader();
-            laserManager = new LaserManager();
-            spaceship = new Spaceship(spaceshipTexture,spaceshipLaserTexture, keyboardReader);
-            random = new Random();
-            enemies = new List<Enemy>();*/
 
             ChangeState(new MainMenuState(this));
             SpriteBatch = new SpriteBatch(GraphicsDevice);
@@ -58,12 +40,6 @@ namespace GeometryWars_EvaHautecler
 
         protected override void LoadContent()
         {
-            /*_spriteBatch = new SpriteBatch(GraphicsDevice);
-            backgroundTexture = Content.Load<Texture2D>("Background");
-            spaceshipTexture = Content.Load<Texture2D>("Spaceship");
-            spaceshipLaserTexture = Content.Load<Texture2D>("Charge");
-            enemy1Texture = Content.Load<Texture2D>("Enemy1");*/
-
             // TODO: use this.Content to load your game content here
         }
 
