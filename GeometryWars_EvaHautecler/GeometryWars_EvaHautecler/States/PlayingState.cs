@@ -24,6 +24,7 @@ namespace GeometryWars_EvaHautecler.States
         private Texture2D level1EnemyTexture;
         private Texture2D level2EnemyTexture;
         private Texture2D level3EnemyTexture;
+        private Texture2D heartTexture;
 
         private Spaceship spaceship;
         private List<Enemy> enemies;
@@ -37,12 +38,16 @@ namespace GeometryWars_EvaHautecler.States
         private bool isGameOver;
         private int score;
         private int currentLevel;
-        private int[] levelThresholds = { 100, 200, 400, 600 };
+        private int[] levelThresholds = { 20, 20, 30, 600 };
         private SpriteFont font;
 
         private bool transitioning;
         private float transitionTimer;
         private const float TransitionDelay = 2f;
+
+        private int lives;
+        private const int maxLives = 3;
+        private bool isHit;
 
         public PlayingState(Game1 game, int initialLevel = 1)
         {
@@ -54,6 +59,9 @@ namespace GeometryWars_EvaHautecler.States
             enemiesSpawned = 0;
             transitioning = false;
             transitionTimer = 0;
+
+            lives = initialLevel == 4 ? maxLives : 1;
+            isHit = false;
         }
 
         public void Enter()
@@ -64,6 +72,7 @@ namespace GeometryWars_EvaHautecler.States
             level1EnemyTexture = game.Content.Load<Texture2D>("Enemy1");
             level2EnemyTexture = game.Content.Load<Texture2D>("Enemy2");
             level3EnemyTexture = game.Content.Load<Texture2D>("Enemy3");
+            heartTexture = game.Content.Load<Texture2D>("Heart");
             font = game.Content.Load<SpriteFont>("File");
 
             keyboardReader = new KeyboardReader();
@@ -135,7 +144,7 @@ namespace GeometryWars_EvaHautecler.States
 
                 if (enemy.GetRectangle().Intersects(spaceship.GetCollisionRectangle()))
                 {
-                    isGameOver = true;
+                    HandlePlayerHit();
                     break;
                 }
             }
@@ -167,6 +176,13 @@ namespace GeometryWars_EvaHautecler.States
                    enemy.Draw(game.SpriteBatch);
                 }
             game.SpriteBatch.DrawString(font, $"Score: {score}", new Vector2(10, 10), Color.White);
+            if (currentLevel == 4)
+            {
+                for (int i = 0; i < lives; i++)
+                {
+                    game.SpriteBatch.Draw(heartTexture, new Vector2(10 + i * 40, 50), Color.White);
+                }
+            }
             if (transitioning)
             {
                 game.ChangeState(new LevelTransitionState(game, currentLevel ));
@@ -174,6 +190,18 @@ namespace GeometryWars_EvaHautecler.States
             game.SpriteBatch.End();
         }
 
+        private void HandlePlayerHit()
+        {
+            if (lives > 1)
+            {
+                lives--;
+                isHit = true;
+            }
+            else
+            {
+                isGameOver = true;
+            }
+        }
         private void SpawnEnemiesForLevel()
         {
             int enemyCount = 1 + currentLevel;
