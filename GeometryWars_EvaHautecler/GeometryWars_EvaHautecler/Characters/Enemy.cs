@@ -17,6 +17,9 @@ namespace GeometryWars_EvaHautecler.Characters
         private Random random;
         private EnemyType enemyType;
         private Vector2 direction;
+        private Vector2 zigzagDirection;
+        private float zigzagTimer;
+        private const float zigzagInterval = 0.5f;
         public int PointValue { get; private set; }
 
         public Enemy(Texture2D enemyTexture, float speed, Random random, int pointValue, EnemyType enemyType)
@@ -33,6 +36,11 @@ namespace GeometryWars_EvaHautecler.Characters
             if (enemyType == EnemyType.Type1)
             {
                 SetRandomDirection();
+            }
+            else if (enemyType == EnemyType.Type2)
+            {
+                SetZigzagDirection();
+                zigzagTimer = zigzagInterval;
             }
         }
 
@@ -72,13 +80,31 @@ namespace GeometryWars_EvaHautecler.Characters
             direction = new Vector2((float)(random.NextDouble() * 2 - 1), (float)(random.NextDouble() * 2 - 1));
             direction.Normalize();
         }
+        private void SetZigzagDirection()
+        {
+            zigzagDirection = new Vector2((float)(random.NextDouble() * 2 - 1), (float)(random.NextDouble() * 2 - 1));
+            zigzagDirection.Normalize();
+        }
 
         public void Update(GameTime gameTime, Vector2 heroPosition)
         {
 
             Vector2 enemyPosition = new Vector2(enemyRectangle.X, enemyRectangle.Y);
 
-            if (enemyType == EnemyType.Type2 || enemyType == EnemyType.Type3)
+            if (enemyType == EnemyType.Type2)
+            {
+                zigzagTimer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+                if (zigzagTimer <= 0)
+                {
+                    SetZigzagDirection();
+                    zigzagTimer = zigzagInterval;
+                }
+                enemyPosition += zigzagDirection * speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                Vector2 directionToHero = heroPosition - enemyPosition;
+                directionToHero.Normalize();
+                enemyPosition += directionToHero * speed * (float)gameTime.ElapsedGameTime.TotalSeconds * 0.5f;
+            }
+            else if ( enemyType == EnemyType.Type3)
             {
                 Vector2 directionToHero = heroPosition - enemyPosition;
                 directionToHero.Normalize();
