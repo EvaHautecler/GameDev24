@@ -38,7 +38,7 @@ namespace GeometryWars_EvaHautecler.States
         private bool isGameOver;
         private int score;
         private int currentLevel;
-        private int[] levelThresholds = { 20, 20, 30, 600 };
+        private int[] levelThresholds = { 100, 20, 30, 600 };
         private SpriteFont font;
 
         private bool transitioning;
@@ -127,25 +127,31 @@ namespace GeometryWars_EvaHautecler.States
             List<Enemy> enemiesToRemove = new List<Enemy>();
             List<SpaceshipLaser> lasersToRemove = new List<SpaceshipLaser>();
 
-            foreach (var enemy in enemies)
+            for (int i = 0; i < enemies.Count; i++)
+            //foreach (var enemy in enemies)
             {
-                enemy.Update(gameTime, new Vector2(spaceship.Rectangle.Center.X, spaceship.Rectangle.Center.Y));
+                enemies[i].Update(gameTime, new Vector2(spaceship.Rectangle.Center.X, spaceship.Rectangle.Center.Y));
 
                 foreach (var laser in spaceship.GetLaserManager().GetLasers())
                 {
-                    if (enemy.GetRectangle().Intersects(laser.LaserRectangle()))
+                    if (enemies[i].GetRectangle().Intersects(laser.LaserRectangle()))
                     {
-                        enemiesToRemove.Add(enemy);
+                        enemiesToRemove.Add(enemies[i]);
                         lasersToRemove.Add(laser);
-                        score += enemy.PointValue;
+                        score += enemies[i].PointValue;
                         break;
                     }
                 }
 
-                if (enemy.GetRectangle().Intersects(spaceship.GetCollisionRectangle()))
+                if (enemies[i].GetRectangle().Intersects(spaceship.GetCollisionRectangle()))
                 {
                     HandlePlayerHit();
                     break;
+                }
+
+                for (int j = i+1; j < enemies.Count; j++)
+                {
+                    enemies[i].HandleCollision(enemies[j]);
                 }
             }
 
@@ -168,13 +174,13 @@ namespace GeometryWars_EvaHautecler.States
             game.SpriteBatch.Draw(backgroundTexture, new Rectangle(0, 0, 2000, 988), Color.White);
 
 
-                spaceship.Draw(game.SpriteBatch);
-                laserManager.Draw(game.SpriteBatch);
+            spaceship.Draw(game.SpriteBatch);
+            laserManager.Draw(game.SpriteBatch);
 
-                foreach (var enemy in enemies)
-                {
-                   enemy.Draw(game.SpriteBatch);
-                }
+            foreach (var enemy in enemies)
+            {
+               enemy.Draw(game.SpriteBatch);
+            }
             game.SpriteBatch.DrawString(font, $"Score: {score}", new Vector2(10, 10), Color.White);
             if (currentLevel == 4)
             {

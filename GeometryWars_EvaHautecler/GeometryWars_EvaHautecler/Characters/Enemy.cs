@@ -155,5 +155,76 @@ namespace GeometryWars_EvaHautecler.Characters
         {
             return enemyRectangle;
         }
-    }
+
+        public void OnCollision(Enemy otherEnemy)
+        {
+            Vector2 normal = new Vector2(enemyRectangle.X, enemyRectangle.Y) - new Vector2(otherEnemy.enemyRectangle.X, otherEnemy.enemyRectangle.Y);
+            normal.Normalize();
+
+            Vector2 relativeVelocity = direction - otherEnemy.direction;
+            float speed = Vector2.Dot(relativeVelocity, normal);
+
+            if (speed < 0)
+            {
+                return;
+            }
+
+            direction -= speed * normal;
+            otherEnemy.direction += speed * normal;
+        }
+
+        public void HandleCollision(Enemy otherEnemy)
+        {
+            Rectangle rect1 = GetRectangle();
+            Rectangle rect2 = otherEnemy.GetRectangle();
+
+            if (rect1.Intersects(rect2))
+            {
+                Vector2 normal = new Vector2(rect2.X - rect1.X, rect2.Y - rect1.Y);
+                normal.Normalize();
+
+                direction = -direction;
+                otherEnemy.direction = -otherEnemy.direction;
+
+                Vector2 overlap = new Vector2(
+                    (rect1.X + rect1.Width / 2) - (rect2.X + rect2.Width / 2),
+                    (rect1.Y + rect1.Height / 2) - (rect2.Y + rect2.Height / 2));
+
+                float halfWidth1 = rect1.Width / 2.0f;
+                float halfHeight1 = rect1.Height / 2.0f;
+                float halfWidth2 = rect2.Width / 2.0f;
+                float halfHeight2 = rect2.Height / 2.0f;
+
+                float dx = halfWidth1 + halfWidth2 - Math.Abs(overlap.X);
+                float dy = halfHeight1 + halfHeight2 - Math.Abs(overlap.Y);
+
+                if (dx < dy)
+                {
+                    if (overlap.X < 0)
+                    {
+                        enemyRectangle.X -= (int)dx / 2;
+                        otherEnemy.enemyRectangle.X += (int)dx / 2;
+                    }
+                    else
+                    {
+                        enemyRectangle.X += (int)dx / 2;
+                        otherEnemy.enemyRectangle.X -= (int)dx / 2;
+                    }
+                }
+                else
+                {
+                    if (overlap.Y < 0)
+                    {
+                        enemyRectangle.Y -= (int)dy / 2;
+                        otherEnemy.enemyRectangle.Y += (int)dy / 2;
+                    }
+                    else
+                    {
+                        enemyRectangle.Y += (int)dy / 2;
+                        otherEnemy.enemyRectangle.Y -= (int)dy / 2;
+                    }
+                }
+            }
+        }
+        }
 }
