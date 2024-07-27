@@ -9,6 +9,6 @@ namespace GeometryWars_EvaHautecler.Characters
 {
     public class Level1Enemy : Enemy
     {
-        public Level1Enemy(Texture2D enemyTexture, float speed, Random random) : base(enemyTexture, speed, random) { }
+        public Level1Enemy(Texture2D enemyTexture, float speed, Random random, int pointValue) : base(enemyTexture, speed, random, pointValue) { }
     }
 }

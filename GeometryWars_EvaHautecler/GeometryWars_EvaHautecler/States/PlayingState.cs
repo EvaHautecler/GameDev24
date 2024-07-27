@@ -37,7 +37,7 @@ namespace GeometryWars_EvaHautecler.States
         private bool isGameOver;
         private int score;
         private int currentLevel;
-        private int[] levelThresholds = { 50, 100, 150, 200 };
+        private int[] levelThresholds = { 100, 200, 400, 600 };
         private SpriteFont font;
 
         private bool transitioning;
@@ -128,7 +128,7 @@ namespace GeometryWars_EvaHautecler.States
                     {
                         enemiesToRemove.Add(enemy);
                         lasersToRemove.Add(laser);
-                        score += 5;
+                        score += enemy.PointValue;
                         break;
                     }
                 }
@@ -182,18 +182,18 @@ namespace GeometryWars_EvaHautecler.States
                 switch (currentLevel)
                 {
                     case 1:
-                        enemies.Add(new Level1Enemy(level1EnemyTexture, 100f, random));
+                        enemies.Add(new Level1Enemy(level1EnemyTexture, 100f, random, 5));
                         break;
                     case 2:
-                        enemies.Add(new Level2Enemy(level2EnemyTexture, 120f, random));
+                        enemies.Add(new Level2Enemy(level2EnemyTexture, 120f, random, 10));
                         break;
                     case 3:
-                        enemies.Add(new Level3Enemy(level3EnemyTexture, 140f, random));
+                        enemies.Add(new Level3Enemy(level3EnemyTexture, 140f, random, 15));
                         break;
                     case 4:
-                        enemies.Add(new Level1Enemy(level1EnemyTexture, 100f, random));
-                        enemies.Add(new Level2Enemy(level2EnemyTexture, 120f, random));
-                        enemies.Add(new Level3Enemy(level3EnemyTexture, 140f, random));
+                        enemies.Add(new Level1Enemy(level1EnemyTexture, 100f, random, 5));
+                        enemies.Add(new Level2Enemy(level2EnemyTexture, 120f, random, 10));
+                        enemies.Add(new Level3Enemy(level3EnemyTexture, 140f, random, 15));
                         break;
                 }
                 enemiesSpawned++;

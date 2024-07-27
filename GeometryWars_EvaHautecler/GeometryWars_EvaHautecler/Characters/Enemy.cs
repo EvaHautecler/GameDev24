@@ -14,13 +14,15 @@ namespace GeometryWars_EvaHautecler.Characters
         private Rectangle enemyRectangle;
         private float speed;
         private Random random;
+        public int PointValue { get; private set; }
 
-        public Enemy(Texture2D enemyTexture, float speed, Random random)
+        public Enemy(Texture2D enemyTexture, float speed, Random random, int pointValue)
         {
             this.enemyTexture = enemyTexture;
             this.speed = speed;
             //enemy1Rectangle = new Rectangle((int)initialPosition.X, (int)initialPosition.Y, 70, 70);
             this.random = random;
+            this.PointValue = pointValue;
 
             SpawnOutsideScreen();
         }
