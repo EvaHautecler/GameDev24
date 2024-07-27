@@ -8,23 +8,32 @@ using System.Threading.Tasks;
 
 namespace GeometryWars_EvaHautecler.Characters
 {
+    public enum EnemyType { Type1, Type2, Type3}
     public class Enemy
     {
         private Texture2D enemyTexture;
         private Rectangle enemyRectangle;
         private float speed;
         private Random random;
+        private EnemyType enemyType;
+        private Vector2 direction;
         public int PointValue { get; private set; }
 
-        public Enemy(Texture2D enemyTexture, float speed, Random random, int pointValue)
+        public Enemy(Texture2D enemyTexture, float speed, Random random, int pointValue, EnemyType enemyType)
         {
             this.enemyTexture = enemyTexture;
             this.speed = speed;
             //enemy1Rectangle = new Rectangle((int)initialPosition.X, (int)initialPosition.Y, 70, 70);
             this.random = random;
             this.PointValue = pointValue;
+            this.enemyType = enemyType;
 
             SpawnOutsideScreen();
+
+            if (enemyType == EnemyType.Type1)
+            {
+                SetRandomDirection();
+            }
         }
 
         public void SpawnOutsideScreen()
@@ -58,15 +67,47 @@ namespace GeometryWars_EvaHautecler.Characters
             enemyRectangle = new Rectangle(x, y, 70, 70);
         }
 
+        private void SetRandomDirection()
+        {
+            direction = new Vector2((float)(random.NextDouble() * 2 - 1), (float)(random.NextDouble() * 2 - 1));
+            direction.Normalize();
+        }
+
         public void Update(GameTime gameTime, Vector2 heroPosition)
         {
+
             Vector2 enemyPosition = new Vector2(enemyRectangle.X, enemyRectangle.Y);
+
+            if (enemyType == EnemyType.Type2 || enemyType == EnemyType.Type3)
+            {
+                Vector2 directionToHero = heroPosition - enemyPosition;
+                directionToHero.Normalize();
+                enemyPosition += directionToHero * speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            }
+            else if (enemyType == EnemyType.Type1)
+            {
+                enemyPosition += direction * speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+                if (enemyPosition.X < 0 || enemyPosition.X > 2000 - enemyRectangle.Width)
+                {
+                    direction.X = -direction.X;
+                }
+                if (enemyPosition.Y < 0 || enemyPosition.Y > 988 - enemyRectangle.Height)
+                {
+                    direction.Y = -direction.Y;
+                }
+            }
+
+            enemyRectangle.X = (int)enemyPosition.X;
+            enemyRectangle.Y = (int)enemyPosition.Y;
+
+            /*Vector2 enemyPosition = new Vector2(enemyRectangle.X, enemyRectangle.Y);
             Vector2 direction = heroPosition - enemyPosition;
             direction.Normalize();
 
             enemyPosition += direction * speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
             enemyRectangle.X = (int)enemyPosition.X;
-            enemyRectangle.Y = (int)enemyPosition.Y;
+            enemyRectangle.Y = (int)enemyPosition.Y;*/
         }
 
         public void Draw(SpriteBatch spriteBatch)

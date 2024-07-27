@@ -179,24 +179,33 @@ namespace GeometryWars_EvaHautecler.States
             int enemyCount = 1 + currentLevel;
             for (int i = 0; i < enemyCount && enemiesSpawned < maxEnemies; i++)
             {
+                int numberEnemiesToSpawn = (currentLevel == 1 && i == 0) ? 10 : 5;
                 switch (currentLevel)
                 {
                     case 1:
-                        enemies.Add(new Level1Enemy(level1EnemyTexture, 100f, random, 5));
+                        for (int j = 0; j < numberEnemiesToSpawn && enemiesSpawned < maxEnemies; j++)
+                        {
+                        enemies.Add(new Enemy(level1EnemyTexture, 150f, random, 5, EnemyType.Type1));
+                            enemiesSpawned++;
+                        }
                         break;
                     case 2:
-                        enemies.Add(new Level2Enemy(level2EnemyTexture, 120f, random, 10));
+                        enemies.Add(new Enemy(level2EnemyTexture, 120f, random, 10,EnemyType.Type2));
+                        enemiesSpawned++;
                         break;
                     case 3:
-                        enemies.Add(new Level3Enemy(level3EnemyTexture, 140f, random, 15));
+                        enemies.Add(new Enemy(level3EnemyTexture, 140f, random, 15, EnemyType.Type3));
+                        enemiesSpawned++;
                         break;
                     case 4:
-                        enemies.Add(new Level1Enemy(level1EnemyTexture, 100f, random, 5));
-                        enemies.Add(new Level2Enemy(level2EnemyTexture, 120f, random, 10));
-                        enemies.Add(new Level3Enemy(level3EnemyTexture, 140f, random, 15));
+                        enemies.Add(new Enemy(level1EnemyTexture, 100f, random, 5, EnemyType.Type1));
+                        enemies.Add(new Enemy(level2EnemyTexture, 120f, random, 10, EnemyType.Type2));
+                        enemies.Add(new Enemy(level3EnemyTexture, 140f, random, 15, EnemyType.Type3));
+                        enemiesSpawned += 3;
                         break;
                 }
-                enemiesSpawned++;
+                //enemiesSpawned++;
+                
             }
         }
 

@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace GeometryWars_EvaHautecler.Characters
 {
-    public class Level1Enemy : Enemy
+    /*public class Level1Enemy : Enemy
     {
-        public Level1Enemy(Texture2D enemyTexture, float speed, Random random, int pointValue) : base(enemyTexture, speed, random, pointValue) { }
-    }
+        public Level1Enemy(Texture2D enemyTexture, float speed, Random random, int pointValue ) : base(enemyTexture, speed, random, pointValue) { }
+    }*/
 }
