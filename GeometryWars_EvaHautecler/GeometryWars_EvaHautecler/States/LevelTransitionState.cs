@@ -20,7 +20,7 @@ namespace GeometryWars_EvaHautecler.States
         {
             this.game = game;
             this.nextLevel = nextLevel;
-            this.timer = 5.0;
+            this.timer = 2.0;
         }
 
         public void Enter()

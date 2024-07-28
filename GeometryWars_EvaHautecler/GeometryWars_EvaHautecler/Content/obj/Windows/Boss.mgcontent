@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/EvaHa/GameDev24/GeometryWars_EvaHautecler/GeometryWars_EvaHautecler/Content/Rock.png</SourceFile>
-  <SourceTime>2024-07-27T18:49:32.7090444+02:00</SourceTime>
-  <DestFile>C:/Users/EvaHa/GameDev24/GeometryWars_EvaHautecler/GeometryWars_EvaHautecler/Content/bin/Windows/Rock.xnb</DestFile>
-  <DestTime>2024-07-28T16:21:31.0965551+02:00</DestTime>
+  <SourceFile>C:/Users/EvaHa/GameDev24/GeometryWars_EvaHautecler/GeometryWars_EvaHautecler/Content/Boss.png</SourceFile>
+  <SourceTime>2024-07-28T15:23:14.3833379+02:00</SourceTime>
+  <DestFile>C:/Users/EvaHa/GameDev24/GeometryWars_EvaHautecler/GeometryWars_EvaHautecler/Content/bin/Windows/Boss.xnb</DestFile>
+  <DestTime>2024-07-28T16:21:30.9309085+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2022-07-26T13:44:56+02:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

@@ -19,7 +19,7 @@ namespace GeometryWars_EvaHautecler.Characters
         {
             this.health = maxHealth;
             this.healthBarTexture = healthBarTexture;
-            this.healthBarPosition = new Vector2(100, 50);
+            this.healthBarPosition = new Vector2(1000, 50);
         }
 
         public bool IsDefeated => health <= 0;
@@ -32,7 +32,7 @@ namespace GeometryWars_EvaHautecler.Characters
         public void DrawHealthBar(SpriteBatch spriteBatch)
         {
             float healthPercentage = (float)health / maxHealth;
-            Rectangle healthBarRectangle = new Rectangle((int)healthBarPosition.X, (int)healthBarPosition.Y, (int)(healthBarTexture.Width * healthPercentage), healthBarTexture.Height);
+            Rectangle healthBarRectangle = new Rectangle((int)healthBarPosition.X, (int)healthBarPosition.Y, (int)(healthBarTexture.Width * healthPercentage), (healthBarTexture.Height/2));
             spriteBatch.Draw(healthBarTexture, healthBarRectangle, Color.Red);
         }
     }

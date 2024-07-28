@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace GeometryWars_EvaHautecler.Characters
 {
-    public enum EnemyType { Type1, Type2, Type3}
+    public enum EnemyType { Type1, Type2, Type3, Type4}
     public class Enemy
     {
         private Texture2D enemyTexture;
@@ -130,13 +130,6 @@ namespace GeometryWars_EvaHautecler.Characters
             enemyRectangle.X = (int)enemyPosition.X;
             enemyRectangle.Y = (int)enemyPosition.Y;
 
-            /*Vector2 enemyPosition = new Vector2(enemyRectangle.X, enemyRectangle.Y);
-            Vector2 direction = heroPosition - enemyPosition;
-            direction.Normalize();
-
-            enemyPosition += direction * speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
-            enemyRectangle.X = (int)enemyPosition.X;
-            enemyRectangle.Y = (int)enemyPosition.Y;*/
             
         }
 

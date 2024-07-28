@@ -24,6 +24,7 @@ namespace GeometryWars_EvaHautecler.States
         private Texture2D level1EnemyTexture;
         private Texture2D level2EnemyTexture;
         private Texture2D level3EnemyTexture;
+        private Texture2D bossTexture;
         private Texture2D heartTexture;
         private Texture2D healthBarTexture;
 
@@ -74,6 +75,7 @@ namespace GeometryWars_EvaHautecler.States
             level1EnemyTexture = game.Content.Load<Texture2D>("Enemy1");
             level2EnemyTexture = game.Content.Load<Texture2D>("Enemy2");
             level3EnemyTexture = game.Content.Load<Texture2D>("Enemy3");
+            bossTexture = game.Content.Load<Texture2D>("Boss");
             healthBarTexture = game.Content.Load<Texture2D>("HealthBar");
             heartTexture = game.Content.Load<Texture2D>("Heart");
             font = game.Content.Load<SpriteFont>("File");
@@ -83,7 +85,7 @@ namespace GeometryWars_EvaHautecler.States
             spaceship = new Spaceship(spaceshipTexture, spaceshipLaserTexture, keyboardReader);
             random = new Random();
             enemies = new List<Enemy>();
-            boss = new Boss(level3EnemyTexture, 80f, random, healthBarTexture);
+            boss = new Boss(level3EnemyTexture, 160f, random, healthBarTexture);
         }
 
         public void Exit() { }
@@ -176,7 +178,7 @@ namespace GeometryWars_EvaHautecler.States
                     enemies.Remove(enemy);
                 }
             }
-            else
+            else if(currentLevel == 5)
             {
                 boss.Update(gameTime, new Vector2(spaceship.Rectangle.Center.X, spaceship.Rectangle.Center.Y));
                 foreach (var laser in spaceship.GetLaserManager().GetLasers())
@@ -194,9 +196,9 @@ namespace GeometryWars_EvaHautecler.States
                     }
                 }
 
-                if (boss.GetRectangle().Intersects(spaceship.GetCollisionRectangle()) && !spaceship.IsInvulnerable())
+                if (boss.GetRectangle().Intersects(spaceship.GetCollisionRectangle()))
                 {
-                    HandlePlayerHit();
+                    game.ChangeState(new GameOverState(game));
                 }
             }
 
@@ -283,18 +285,13 @@ namespace GeometryWars_EvaHautecler.States
                         enemiesSpawned += 3;
                         break;
                     case 5:
-                        //enemies.Add(new Boss(level3EnemyTexture, 80f, random, healthBarTexture));
-                        boss = new Boss(level3EnemyTexture, 80f, random, healthBarTexture);
+                        //enemies.Add(new Boss(level3EnemyTexture, 80f, random, healthBarTexture, EnemyType.Type3));
+                        enemies.Add(boss);
                         break;
                 }
                 //enemiesSpawned++;
                 
             }
-        }
-
-        private int CalculateMaxEnemies(int levelThreshold)
-        {
-            return levelThreshold / 5;
         }
 
         private void CheckLevelProgression()
