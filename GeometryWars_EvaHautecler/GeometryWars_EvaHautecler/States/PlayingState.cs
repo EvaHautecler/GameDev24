@@ -25,21 +25,24 @@ namespace GeometryWars_EvaHautecler.States
         private Texture2D level2EnemyTexture;
         private Texture2D level3EnemyTexture;
         private Texture2D heartTexture;
+        private Texture2D healthBarTexture;
 
         private Spaceship spaceship;
+        private Boss boss;
+        private bool bossDefeated;
         private List<Enemy> enemies;
         private Random random;
         private float enemySpawnCooldown = 3.5f;
         private float enemySpawnTimer;
         private int enemiesSpawned;
-        private int maxEnemies;
+        //private int maxEnemies;
         private KeyboardReader keyboardReader;
         private LaserManager laserManager;
 
         private bool isGameOver;
         private int score;
         private int currentLevel;
-        private int[] levelThresholds = { 5, 10, 15, 600 };
+        private int[] levelThresholds = { 5, 10, 15, 15 };
         private SpriteFont font;
 
         private bool transitioning;
@@ -55,8 +58,8 @@ namespace GeometryWars_EvaHautecler.States
             isGameOver = false;
             score = 0;
             currentLevel = initialLevel;
-            maxEnemies = CalculateMaxEnemies(levelThresholds[currentLevel - 1]);
-            enemiesSpawned = 0;
+            //maxEnemies = CalculateMaxEnemies(levelThresholds[currentLevel - 1]);
+            //enemiesSpawned = 0;
             transitioning = false;
             transitionTimer = 0;
 
@@ -71,6 +74,7 @@ namespace GeometryWars_EvaHautecler.States
             level1EnemyTexture = game.Content.Load<Texture2D>("Enemy1");
             level2EnemyTexture = game.Content.Load<Texture2D>("Enemy2");
             level3EnemyTexture = game.Content.Load<Texture2D>("Enemy3");
+            healthBarTexture = game.Content.Load<Texture2D>("HealthBar");
             heartTexture = game.Content.Load<Texture2D>("Heart");
             font = game.Content.Load<SpriteFont>("File");
 
@@ -79,6 +83,7 @@ namespace GeometryWars_EvaHautecler.States
             spaceship = new Spaceship(spaceshipTexture, spaceshipLaserTexture, keyboardReader);
             random = new Random();
             enemies = new List<Enemy>();
+            boss = new Boss(level3EnemyTexture, 80f, random, healthBarTexture);
         }
 
         public void Exit() { }
@@ -115,55 +120,88 @@ namespace GeometryWars_EvaHautecler.States
             spaceship.Update(gameTime);
             laserManager.Update(gameTime);
             enemySpawnTimer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
-            if (enemySpawnTimer <= 0 && enemiesSpawned < maxEnemies && enemies.Count < maxEnemies)
+            if (currentLevel < 5)
             {
-                SpawnEnemiesForLevel();
+                if (enemySpawnTimer <= 0 )
+                {
+                    SpawnEnemiesForLevel();
 
-                //enemies.Add(new Enemy(level1EnemyTexture, 100f, random));
-                enemySpawnTimer = enemySpawnCooldown;
+                    //enemies.Add(new Enemy(level1EnemyTexture, 100f, random));
+                    enemySpawnTimer = enemySpawnCooldown;
+                }
+
+                List<Enemy> enemiesToRemove = new List<Enemy>();
+                List<SpaceshipLaser> lasersToRemove = new List<SpaceshipLaser>();
+
+                //for (int i = 0; i < enemies.Count; i++)
+                foreach (var enemy in enemies)
+                {
+                    enemy.Update(gameTime, new Vector2(spaceship.Rectangle.Center.X, spaceship.Rectangle.Center.Y));
+
+                    foreach (var laser in spaceship.GetLaserManager().GetLasers())
+                    {
+                        if (enemy.GetRectangle().Intersects(laser.LaserRectangle()))
+                        {
+                            enemiesToRemove.Add(enemy);
+                            lasersToRemove.Add(laser);
+                            score += enemy.PointValue;
+                            break;
+                        }
+                    }
+
+                    if (enemy.GetRectangle().Intersects(spaceship.GetCollisionRectangle()) && !spaceship.IsInvulnerable())
+                    {
+                        HandlePlayerHit();
+                        break;
+                    }
+
+                    //for (int j = i + 1; j < enemies.Count; j++)
+                    foreach (var enemies in enemies)
+                    {
+                        enemy.HandleCollision(enemies);
+
+                    }
+                    
+                    
+                }
+
+
+                foreach (var laser in lasersToRemove)
+                {
+                    spaceship.GetLaserManager().RemoveLaser(laser);
+                }
+
+                foreach (var enemy in enemiesToRemove)
+                {
+                    enemies.Remove(enemy);
+                }
             }
-
-            List<Enemy> enemiesToRemove = new List<Enemy>();
-            List<SpaceshipLaser> lasersToRemove = new List<SpaceshipLaser>();
-
-            for (int i = 0; i < enemies.Count; i++)
-            //foreach (var enemy in enemies)
+            else
             {
-                enemies[i].Update(gameTime, new Vector2(spaceship.Rectangle.Center.X, spaceship.Rectangle.Center.Y));
-
+                boss.Update(gameTime, new Vector2(spaceship.Rectangle.Center.X, spaceship.Rectangle.Center.Y));
                 foreach (var laser in spaceship.GetLaserManager().GetLasers())
                 {
-                    if (enemies[i].GetRectangle().Intersects(laser.LaserRectangle()))
+                    if (boss.GetRectangle().Intersects(laser.LaserRectangle()))
                     {
-                        enemiesToRemove.Add(enemies[i]);
-                        lasersToRemove.Add(laser);
-                        score += enemies[i].PointValue;
+                        boss.TakeDamage();
+                        spaceship.GetLaserManager().RemoveLaser(laser);
+                        if (boss.IsDefeated)
+                        {
+                            bossDefeated = true;
+                            score += boss.PointValue;
+                        }
                         break;
                     }
                 }
 
-                if (enemies[i].GetRectangle().Intersects(spaceship.GetCollisionRectangle()) && !spaceship.IsInvulnerable())
+                if (boss.GetRectangle().Intersects(spaceship.GetCollisionRectangle()) && !spaceship.IsInvulnerable())
                 {
                     HandlePlayerHit();
-                    break;
-                }
-
-                for (int j = i+1; j < enemies.Count; j++)
-                {
-                    enemies[i].HandleCollision(enemies[j]);
                 }
             }
 
-            foreach (var laser in lasersToRemove)
-            {
-                spaceship.GetLaserManager().RemoveLaser(laser);
-            }
+             CheckLevelProgression();
 
-            foreach (var enemy in enemiesToRemove)
-            {
-                enemies.Remove(enemy);
-            }
-            CheckLevelProgression();
         }
 
         public void Draw(GameTime gameTime)
@@ -175,12 +213,22 @@ namespace GeometryWars_EvaHautecler.States
             spaceship.Draw(game.SpriteBatch);
             laserManager.Draw(game.SpriteBatch);
 
-            foreach (var enemy in enemies)
+            if (currentLevel < 5)
             {
-               enemy.Draw(game.SpriteBatch);
+                foreach (var enemy in enemies)
+                {
+                    enemy.Draw(game.SpriteBatch);
+                }
             }
+            else
+            {
+                boss.Draw(game.SpriteBatch);
+                boss.DrawHealthBar(game.SpriteBatch);
+            }
+
+            
             game.SpriteBatch.DrawString(font, $"Score: {score}", new Vector2(10, 10), Color.White);
-            if (currentLevel == 4)
+            if (currentLevel == 4 || currentLevel == 5)
             {
                 for (int i = 0; i < lives; i++)
                 {
@@ -209,17 +257,16 @@ namespace GeometryWars_EvaHautecler.States
         private void SpawnEnemiesForLevel()
         {
             int enemyCount = 1 + currentLevel;
-            for (int i = 0; i < enemyCount && enemiesSpawned < maxEnemies; i++)
+            for (int i = 0; i < enemyCount ; i++)
             {
                 int numberEnemiesToSpawn = (currentLevel == 1 && i == 0) ? 10 : 5;
                 switch (currentLevel)
                 {
                     case 1:
-                        for (int j = 0; j < numberEnemiesToSpawn && enemiesSpawned < maxEnemies; j++)
-                        {
+                        
                         enemies.Add(new Enemy(level1EnemyTexture, 150f, random, 5, EnemyType.Type1));
-                            enemiesSpawned++;
-                        }
+                        enemiesSpawned++;
+                        
                         break;
                     case 2:
                         enemies.Add(new Enemy(level2EnemyTexture, 120f, random, 10,EnemyType.Type2));
@@ -234,6 +281,10 @@ namespace GeometryWars_EvaHautecler.States
                         enemies.Add(new Enemy(level2EnemyTexture, 100f, random, 10, EnemyType.Type2));
                         enemies.Add(new Enemy(level3EnemyTexture, 100f, random, 15, EnemyType.Type3));
                         enemiesSpawned += 3;
+                        break;
+                    case 5:
+                        //enemies.Add(new Boss(level3EnemyTexture, 80f, random, healthBarTexture));
+                        boss = new Boss(level3EnemyTexture, 80f, random, healthBarTexture);
                         break;
                 }
                 //enemiesSpawned++;
@@ -253,11 +304,24 @@ namespace GeometryWars_EvaHautecler.States
                 enemies.Clear();
                 score = 0;
                 currentLevel++;
-                maxEnemies = CalculateMaxEnemies(levelThresholds[currentLevel - 1]);
+                //maxEnemies = CalculateMaxEnemies(levelThresholds[currentLevel - 1]);
                 enemiesSpawned = 0;
                 transitioning = true;
                 transitionTimer = TransitionDelay;
                 //game.ChangeState(new LevelTransitionState(game, currentLevel));
+            }
+            else if (currentLevel == 4 && score >= levelThresholds[3])
+            {
+                enemies.Clear();
+                score = 0;
+                currentLevel++;
+                bossDefeated = false;
+                transitioning = true;
+                transitionTimer = TransitionDelay;
+            }
+            else if (currentLevel == 5 && bossDefeated)
+            {
+                game.ChangeState(new GameWonState(game));
             }
         }
     }

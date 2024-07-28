@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework;
+﻿using GeometryWars_EvaHautecler.Input;
+using GeometryWars_EvaHautecler.Manager;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -75,10 +77,11 @@ namespace GeometryWars_EvaHautecler.Characters
             enemyRectangle = new Rectangle(x, y, 70, 70);
         }
 
-        private void SetRandomDirection()
+        private Vector2 SetRandomDirection()
         {
             direction = new Vector2((float)(random.NextDouble() * 2 - 1), (float)(random.NextDouble() * 2 - 1));
             direction.Normalize();
+            return direction;
         }
         private void SetZigzagDirection()
         {
@@ -134,6 +137,7 @@ namespace GeometryWars_EvaHautecler.Characters
             enemyPosition += direction * speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
             enemyRectangle.X = (int)enemyPosition.X;
             enemyRectangle.Y = (int)enemyPosition.Y;*/
+            
         }
 
         public void Draw(SpriteBatch spriteBatch)

@@ -12,6 +12,7 @@ namespace GeometryWars_EvaHautecler.Manager
     public class LaserManager
     {
         private List<SpaceshipLaser> lasers = new List<SpaceshipLaser>();
+        
 
         public void AddLasers(Texture2D laserTexture, Rectangle laserRectangle, Vector2 direction)
         {
