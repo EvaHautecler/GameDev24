@@ -7,13 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Input;
+using SharpDX.DirectWrite;
 
 namespace GeometryWars_EvaHautecler.States
 {
     public class MainMenuState : IGameState
     {
         private Game1 game;
-        private SpriteFont font;
+        private SpriteFont fontMain;
+        private string message = "Press Enter to Start";
 
         public MainMenuState(Game1 game)
         {
@@ -22,7 +24,7 @@ namespace GeometryWars_EvaHautecler.States
 
         public void Enter()
         {
-            font = game.Content.Load<SpriteFont>("File");
+            fontMain = game.Content.Load<SpriteFont>("GomePixelFont");
         }
 
         public void Exit()
@@ -39,9 +41,10 @@ namespace GeometryWars_EvaHautecler.States
 
         public void Draw(GameTime gameTime)
         {
-            game.GraphicsDevice.Clear(Color.CornflowerBlue);
+            game.GraphicsDevice.Clear(Color.Black);
             game.SpriteBatch.Begin();
-            game.SpriteBatch.DrawString(font, "Press Enter to Start", new Vector2(100, 100), Color.White);
+            var messageSize = fontMain.MeasureString(message);
+            game.SpriteBatch.DrawString(fontMain, message, new Vector2((game.GraphicsDevice.Viewport.Width - messageSize.X) / 2, (game.GraphicsDevice.Viewport.Height - messageSize.Y) / 2), Color.White);
             game.SpriteBatch.End();
         }
     }

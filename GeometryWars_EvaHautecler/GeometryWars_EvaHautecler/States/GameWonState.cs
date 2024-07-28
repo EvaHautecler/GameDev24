@@ -25,7 +25,7 @@ namespace GeometryWars_EvaHautecler.States
 
         public void Enter()
         {
-            font1 = game.Content.Load<SpriteFont>("GameWonFont");
+            font1 = game.Content.Load<SpriteFont>("BigFont");
             font2 = game.Content.Load<SpriteFont>("File");
         }
 

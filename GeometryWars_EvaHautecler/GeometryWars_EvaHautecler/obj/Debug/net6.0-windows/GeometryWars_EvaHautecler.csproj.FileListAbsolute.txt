@@ -86,3 +86,5 @@ C:\Users\EvaHa\GameDev24\GeometryWars_EvaHautecler\GeometryWars_EvaHautecler\bin
 C:\Users\EvaHa\GameDev24\GeometryWars_EvaHautecler\GeometryWars_EvaHautecler\bin\Debug\net6.0-windows\Content\Rock.xnb
 C:\Users\EvaHa\GameDev24\GeometryWars_EvaHautecler\GeometryWars_EvaHautecler\bin\Debug\net6.0-windows\Content\HealthBar.xnb
 C:\Users\EvaHa\GameDev24\GeometryWars_EvaHautecler\GeometryWars_EvaHautecler\bin\Debug\net6.0-windows\Content\Boss.xnb
+C:\Users\EvaHa\GameDev24\GeometryWars_EvaHautecler\GeometryWars_EvaHautecler\bin\Debug\net6.0-windows\Content\BigFont.xnb
+C:\Users\EvaHa\GameDev24\GeometryWars_EvaHautecler\GeometryWars_EvaHautecler\bin\Debug\net6.0-windows\Content\GomePixelFont.xnb

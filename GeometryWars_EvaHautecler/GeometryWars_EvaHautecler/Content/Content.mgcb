@@ -25,6 +25,13 @@
 /processorParam:TextureFormat=Color
 /build:Background.png
 
+#begin BigFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:BigFont.spritefont
+
 #begin Boss.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -92,12 +99,12 @@
 /processorParam:TextureFormat=Compressed
 /build:File.spritefont
 
-#begin GameWonFont.spritefont
+#begin GomePixelFont.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
-/build:GameWonFont.spritefont
+/build:GomePixelFont.spritefont
 
 #begin HealthBar.png
 /importer:TextureImporter

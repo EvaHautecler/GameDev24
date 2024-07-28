@@ -5,18 +5,22 @@
   <Config />
   <SourceFiles>
     <File>C:/Users/EvaHa/GameDev24/GeometryWars_EvaHautecler/GeometryWars_EvaHautecler/Content/Background.png</File>
+    <File>C:/Users/EvaHa/GameDev24/GeometryWars_EvaHautecler/GeometryWars_EvaHautecler/Content/BigFont.spritefont</File>
     <File>C:/Users/EvaHa/GameDev24/GeometryWars_EvaHautecler/GeometryWars_EvaHautecler/Content/Boss.png</File>
     <File>C:/Users/EvaHa/GameDev24/GeometryWars_EvaHautecler/GeometryWars_EvaHautecler/Content/Charge.png</File>
     <File>C:/Users/EvaHa/GameDev24/GeometryWars_EvaHautecler/GeometryWars_EvaHautecler/Content/Enemy1.png</File>
     <File>C:/Users/EvaHa/GameDev24/GeometryWars_EvaHautecler/GeometryWars_EvaHautecler/Content/Enemy2.png</File>
     <File>C:/Users/EvaHa/GameDev24/GeometryWars_EvaHautecler/GeometryWars_EvaHautecler/Content/Enemy3.png</File>
     <File>C:/Users/EvaHa/GameDev24/GeometryWars_EvaHautecler/GeometryWars_EvaHautecler/Content/File.spritefont</File>
+    <File>C:/Users/EvaHa/GameDev24/GeometryWars_EvaHautecler/GeometryWars_EvaHautecler/Content/GomePixelFont.spritefont</File>
     <File>C:/Users/EvaHa/GameDev24/GeometryWars_EvaHautecler/GeometryWars_EvaHautecler/Content/HealthBar.png</File>
     <File>C:/Users/EvaHa/GameDev24/GeometryWars_EvaHautecler/GeometryWars_EvaHautecler/Content/Heart.png</File>
     <File>C:/Users/EvaHa/GameDev24/GeometryWars_EvaHautecler/GeometryWars_EvaHautecler/Content/Rock.png</File>
     <File>C:/Users/EvaHa/GameDev24/GeometryWars_EvaHautecler/GeometryWars_EvaHautecler/Content/Spaceship.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

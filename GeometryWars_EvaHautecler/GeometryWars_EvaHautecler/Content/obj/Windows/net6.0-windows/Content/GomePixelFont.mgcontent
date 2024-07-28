@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/EvaHa/GameDev24/GeometryWars_EvaHautecler/GeometryWars_EvaHautecler/Content/File.spritefont</SourceFile>
-  <SourceTime>2024-07-26T13:40:02.9217249+02:00</SourceTime>
-  <DestFile>C:/Users/EvaHa/GameDev24/GeometryWars_EvaHautecler/GeometryWars_EvaHautecler/Content/bin/Windows/File.xnb</DestFile>
-  <DestTime>2024-07-28T16:35:14.4382477+02:00</DestTime>
+  <SourceFile>C:/Users/EvaHa/GameDev24/GeometryWars_EvaHautecler/GeometryWars_EvaHautecler/Content/GomePixelFont.spritefont</SourceFile>
+  <SourceTime>2024-07-28T16:37:20.230037+02:00</SourceTime>
+  <DestFile>C:/Users/EvaHa/GameDev24/GeometryWars_EvaHautecler/GeometryWars_EvaHautecler/Content/bin/Windows/Content/GomePixelFont.xnb</DestFile>
+  <DestTime>2024-07-28T16:39:23.8689238+02:00</DestTime>
   <Importer>FontDescriptionImporter</Importer>
   <ImporterTime>2022-07-26T13:44:56+02:00</ImporterTime>
   <Processor>FontDescriptionProcessor</Processor>
