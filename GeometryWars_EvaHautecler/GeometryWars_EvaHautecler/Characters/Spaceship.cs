@@ -24,6 +24,14 @@ namespace GeometryWars_EvaHautecler.Characters
         private float laserCooldown = 0.25f;
         private float laserTimer;
 
+        private bool isInvulnerable;
+        private float invulnerabilityTimer;
+        private const float invulnerabilityDuration = 2f;
+
+        private bool flicker;
+        private float flickerTimer;
+        private const float flickerInterval = 0.1f;
+
         public Spaceship(Texture2D spaceshipTexture, Texture2D laserTexture, KeyboardReader keyboardReader)
         {
             this.spaceshipTexture = spaceshipTexture;
@@ -36,6 +44,8 @@ namespace GeometryWars_EvaHautecler.Characters
             animation.GetFramesFromTextureProperties(spaceshipTexture.Width, spaceshipTexture.Height, 1, 1);
             laserManager = new LaserManager();
             laserTimer = laserCooldown;
+            isInvulnerable = false;
+            flicker = false;
         }
 
         public void Update(GameTime gameTime)
@@ -50,18 +60,37 @@ namespace GeometryWars_EvaHautecler.Characters
             }
 
             laserManager.Update(gameTime);
+            if (isInvulnerable)
+            {
+                invulnerabilityTimer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+                flickerTimer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+                if (flickerTimer <= 0)
+                {
+                    flicker = !flicker;
+                    flickerTimer = flickerInterval;
+                }
+
+                if (invulnerabilityTimer <= 0)
+                {
+                    isInvulnerable = false;
+                    flicker = false;
+                }
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-
-            if (animation.CurrentFrame != null)
+            if (!flicker || !isInvulnerable)
             {
-                spriteBatch.Draw(spaceshipTexture, spaceshipRectangle, animation.CurrentFrame.SourceRectangle, Color.White, keyboardReader.CalculateAngle(), new Vector2(spaceshipTexture.Width / 2, spaceshipTexture.Height / 2), SpriteEffects.None, 0f);
-            }
-            else
-            {
-                spriteBatch.Draw(spaceshipTexture, spaceshipRectangle, Color.White);
+                if (animation.CurrentFrame != null)
+                {
+                    spriteBatch.Draw(spaceshipTexture, spaceshipRectangle, animation.CurrentFrame.SourceRectangle, Color.White, keyboardReader.CalculateAngle(), new Vector2(spaceshipTexture.Width / 2, spaceshipTexture.Height / 2), SpriteEffects.None, 0f);
+                }
+                else
+                {
+                    spriteBatch.Draw(spaceshipTexture, spaceshipRectangle, Color.White);
+                }
             }
             laserManager.Draw(spriteBatch);
         }
@@ -94,6 +123,13 @@ namespace GeometryWars_EvaHautecler.Characters
             return laserManager;
         }
 
+        public bool IsInvulnerable() { return isInvulnerable; }
+        public void ActivateInvulnerability()
+        {
+            isInvulnerable = true;
+            invulnerabilityTimer = invulnerabilityDuration;
+            flickerTimer = flickerInterval;
+        }
         
     }
 }

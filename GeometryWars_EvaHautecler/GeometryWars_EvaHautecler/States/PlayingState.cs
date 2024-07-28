@@ -35,10 +35,11 @@ namespace GeometryWars_EvaHautecler.States
         private int maxEnemies;
         private KeyboardReader keyboardReader;
         private LaserManager laserManager;
+
         private bool isGameOver;
         private int score;
         private int currentLevel;
-        private int[] levelThresholds = { 100, 20, 30, 600 };
+        private int[] levelThresholds = { 5, 10, 15, 600 };
         private SpriteFont font;
 
         private bool transitioning;
@@ -47,7 +48,6 @@ namespace GeometryWars_EvaHautecler.States
 
         private int lives;
         private const int maxLives = 3;
-        private bool isHit;
 
         public PlayingState(Game1 game, int initialLevel = 1)
         {
@@ -61,7 +61,6 @@ namespace GeometryWars_EvaHautecler.States
             transitionTimer = 0;
 
             lives = initialLevel == 4 ? maxLives : 1;
-            isHit = false;
         }
 
         public void Enter()
@@ -143,7 +142,7 @@ namespace GeometryWars_EvaHautecler.States
                     }
                 }
 
-                if (enemies[i].GetRectangle().Intersects(spaceship.GetCollisionRectangle()))
+                if (enemies[i].GetRectangle().Intersects(spaceship.GetCollisionRectangle()) && !spaceship.IsInvulnerable())
                 {
                     HandlePlayerHit();
                     break;
@@ -164,7 +163,6 @@ namespace GeometryWars_EvaHautecler.States
             {
                 enemies.Remove(enemy);
             }
-
             CheckLevelProgression();
         }
 
@@ -201,7 +199,7 @@ namespace GeometryWars_EvaHautecler.States
             if (lives > 1)
             {
                 lives--;
-                isHit = true;
+                spaceship.ActivateInvulnerability();
             }
             else
             {
@@ -233,8 +231,8 @@ namespace GeometryWars_EvaHautecler.States
                         break;
                     case 4:
                         enemies.Add(new Enemy(level1EnemyTexture, 100f, random, 5, EnemyType.Type1));
-                        enemies.Add(new Enemy(level2EnemyTexture, 120f, random, 10, EnemyType.Type2));
-                        enemies.Add(new Enemy(level3EnemyTexture, 140f, random, 15, EnemyType.Type3));
+                        enemies.Add(new Enemy(level2EnemyTexture, 100f, random, 10, EnemyType.Type2));
+                        enemies.Add(new Enemy(level3EnemyTexture, 100f, random, 15, EnemyType.Type3));
                         enemiesSpawned += 3;
                         break;
                 }

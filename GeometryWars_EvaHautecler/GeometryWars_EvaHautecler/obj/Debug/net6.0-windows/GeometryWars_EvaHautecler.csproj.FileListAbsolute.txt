@@ -83,3 +83,4 @@ C:\Users\EvaHa\GameDev24\GeometryWars_EvaHautecler\GeometryWars_EvaHautecler\bin
 C:\Users\EvaHa\GameDev24\GeometryWars_EvaHautecler\GeometryWars_EvaHautecler\bin\Debug\net6.0-windows\Content\Enemy2.xnb
 C:\Users\EvaHa\GameDev24\GeometryWars_EvaHautecler\GeometryWars_EvaHautecler\bin\Debug\net6.0-windows\Content\Enemy3.xnb
 C:\Users\EvaHa\GameDev24\GeometryWars_EvaHautecler\GeometryWars_EvaHautecler\bin\Debug\net6.0-windows\Content\Heart.xnb
+C:\Users\EvaHa\GameDev24\GeometryWars_EvaHautecler\GeometryWars_EvaHautecler\bin\Debug\net6.0-windows\Content\Rock.xnb
