@@ -1,6 +1,7 @@
 ﻿using GeometryWars_EvaHautecler.Interface;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using SharpDX.DirectWrite;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +26,7 @@ namespace GeometryWars_EvaHautecler.States
 
         public void Enter()
         {
-            font = game.Content.Load<SpriteFont>("File");
+            font = game.Content.Load<SpriteFont>("GL-Nummernschild");
         }
 
         public void Exit() { }
@@ -43,7 +44,10 @@ namespace GeometryWars_EvaHautecler.States
         {
             game.GraphicsDevice.Clear(Color.Black);
             game.SpriteBatch.Begin();
-            game.SpriteBatch.DrawString(font, $"You are now beginning level {nextLevel}", new Vector2(100, 100), Color.White);
+            //game.SpriteBatch.DrawString(font, $"You are now beginning level {nextLevel}", new Vector2(100, 100), Color.White);
+            var messageSize = font.MeasureString($"YOU ARE NOW BEGINNING LEVEL {nextLevel}");
+            game.SpriteBatch.DrawString(font, $"YOU ARE NOW BEGINNING LEVEL {nextLevel}", new Vector2((game.GraphicsDevice.Viewport.Width - messageSize.X) / 2, (game.GraphicsDevice.Viewport.Height - messageSize.Y) / 2), Color.White);
+
             game.SpriteBatch.End();
         }
     }
