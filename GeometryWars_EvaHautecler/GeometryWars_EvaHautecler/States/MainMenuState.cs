@@ -27,10 +27,6 @@ namespace GeometryWars_EvaHautecler.States
             fontMain = game.Content.Load<SpriteFont>("GomePixelFont");
         }
 
-        public void Exit()
-        {
-        }
-
         public void Update(GameTime gameTime)
         {
             if (Keyboard.GetState().IsKeyDown(Keys.Enter))

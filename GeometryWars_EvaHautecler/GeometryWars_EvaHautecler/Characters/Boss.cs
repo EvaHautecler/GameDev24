@@ -15,7 +15,7 @@ namespace GeometryWars_EvaHautecler.Characters
         private Texture2D healthBarTexture;
         private Vector2 healthBarPosition;
 
-        public Boss(Texture2D enemyTexture, float speed, Random random, Texture2D healthBarTexture): base(enemyTexture, speed, random, 15, EnemyType.Type3)
+        public Boss(Texture2D enemyTexture, float speed, Random random, Texture2D healthBarTexture): base(enemyTexture, speed, random, 15, EnemyType.Type2)
         {
             this.health = maxHealth;
             this.healthBarTexture = healthBarTexture;

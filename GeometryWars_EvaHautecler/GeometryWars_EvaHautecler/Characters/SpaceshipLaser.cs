@@ -31,21 +31,6 @@ namespace GeometryWars_EvaHautecler.Characters
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            /*int segmentLength = 20; // Length of each laser segment
-            int gapLength = 1;     // Length of the gap between segments
-            int totalLength = laserRectangle.Height;
-            int currentY = laserRectangle.Y;
-
-            while (currentY < laserRectangle.Y + totalLength)
-            {
-                // Draw the segment
-                Rectangle segmentRectangle = new Rectangle(laserRectangle.X, currentY, laserRectangle.Width, Math.Min(segmentLength, laserRectangle.Y + totalLength - currentY));
-                spriteBatch.Draw(laserTexture, segmentRectangle, Color.White);
-
-                // Move to the next segment position
-                currentY += segmentLength + gapLength;
-            }*/
-
             spriteBatch.Draw(laserTexture, laserRectangle, Color.White);
         }
 

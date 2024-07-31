@@ -28,7 +28,6 @@ namespace GeometryWars_EvaHautecler.Characters
         {
             this.enemyTexture = enemyTexture;
             this.speed = speed;
-            //enemy1Rectangle = new Rectangle((int)initialPosition.X, (int)initialPosition.Y, 70, 70);
             this.random = random;
             this.PointValue = pointValue;
             this.enemyType = enemyType;
@@ -129,7 +128,6 @@ namespace GeometryWars_EvaHautecler.Characters
 
             enemyRectangle.X = (int)enemyPosition.X;
             enemyRectangle.Y = (int)enemyPosition.Y;
-
             
         }
 

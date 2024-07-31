@@ -24,7 +24,6 @@ namespace GeometryWars_EvaHautecler.States
         private Texture2D level1EnemyTexture;
         private Texture2D level2EnemyTexture;
         private Texture2D level3EnemyTexture;
-        private Texture2D bossTexture;
         private Texture2D heartTexture;
         private Texture2D healthBarTexture;
 
@@ -33,17 +32,16 @@ namespace GeometryWars_EvaHautecler.States
         private bool bossDefeated;
         private List<Enemy> enemies;
         private Random random;
-        private float enemySpawnCooldown = 3.5f;
+        private float enemySpawnCooldown = 2.5f;
         private float enemySpawnTimer;
         private int enemiesSpawned;
-        //private int maxEnemies;
         private KeyboardReader keyboardReader;
         private LaserManager laserManager;
 
         private bool isGameOver;
         private int score;
         private int currentLevel;
-        private int[] levelThresholds = { 5, 10, 15, 15 };
+        private int[] levelThresholds = { 70, 120, 150, 200 };
         private SpriteFont font;
 
         private bool transitioning;
@@ -59,8 +57,6 @@ namespace GeometryWars_EvaHautecler.States
             isGameOver = false;
             score = 0;
             currentLevel = initialLevel;
-            //maxEnemies = CalculateMaxEnemies(levelThresholds[currentLevel - 1]);
-            //enemiesSpawned = 0;
             transitioning = false;
             transitionTimer = 0;
 
@@ -75,7 +71,6 @@ namespace GeometryWars_EvaHautecler.States
             level1EnemyTexture = game.Content.Load<Texture2D>("Enemy1");
             level2EnemyTexture = game.Content.Load<Texture2D>("Enemy2");
             level3EnemyTexture = game.Content.Load<Texture2D>("Enemy3");
-            bossTexture = game.Content.Load<Texture2D>("Boss");
             healthBarTexture = game.Content.Load<Texture2D>("HealthBar");
             heartTexture = game.Content.Load<Texture2D>("Heart");
             font = game.Content.Load<SpriteFont>("File");
@@ -85,10 +80,8 @@ namespace GeometryWars_EvaHautecler.States
             spaceship = new Spaceship(spaceshipTexture, spaceshipLaserTexture, keyboardReader);
             random = new Random();
             enemies = new List<Enemy>();
-            boss = new Boss(level3EnemyTexture, 160f, random, healthBarTexture);
+            boss = new Boss(level3EnemyTexture, 200f, random, healthBarTexture);
         }
-
-        public void Exit() { }
 
         public void Update(GameTime gameTime)
         {
@@ -127,15 +120,12 @@ namespace GeometryWars_EvaHautecler.States
                 if (enemySpawnTimer <= 0 )
                 {
                     SpawnEnemiesForLevel();
-
-                    //enemies.Add(new Enemy(level1EnemyTexture, 100f, random));
                     enemySpawnTimer = enemySpawnCooldown;
                 }
 
                 List<Enemy> enemiesToRemove = new List<Enemy>();
                 List<SpaceshipLaser> lasersToRemove = new List<SpaceshipLaser>();
 
-                //for (int i = 0; i < enemies.Count; i++)
                 foreach (var enemy in enemies)
                 {
                     enemy.Update(gameTime, new Vector2(spaceship.Rectangle.Center.X, spaceship.Rectangle.Center.Y));
@@ -157,16 +147,12 @@ namespace GeometryWars_EvaHautecler.States
                         break;
                     }
 
-                    //for (int j = i + 1; j < enemies.Count; j++)
                     foreach (var enemies in enemies)
                     {
                         enemy.HandleCollision(enemies);
 
                     }
-                    
-                    
                 }
-
 
                 foreach (var laser in lasersToRemove)
                 {
@@ -201,9 +187,7 @@ namespace GeometryWars_EvaHautecler.States
                     game.ChangeState(new GameOverState(game));
                 }
             }
-
              CheckLevelProgression();
-
         }
 
         public void Draw(GameTime gameTime)
@@ -266,16 +250,16 @@ namespace GeometryWars_EvaHautecler.States
                 {
                     case 1:
                         
-                        enemies.Add(new Enemy(level1EnemyTexture, 150f, random, 5, EnemyType.Type1));
+                        enemies.Add(new Enemy(level1EnemyTexture, 130f, random, 5, EnemyType.Type1));
                         enemiesSpawned++;
                         
                         break;
                     case 2:
-                        enemies.Add(new Enemy(level2EnemyTexture, 120f, random, 10,EnemyType.Type2));
+                        enemies.Add(new Enemy(level2EnemyTexture, 100f, random, 10,EnemyType.Type2));
                         enemiesSpawned++;
                         break;
                     case 3:
-                        enemies.Add(new Enemy(level3EnemyTexture, 140f, random, 15, EnemyType.Type3));
+                        enemies.Add(new Enemy(level3EnemyTexture, 100f, random, 15, EnemyType.Type3));
                         enemiesSpawned++;
                         break;
                     case 4:
@@ -285,12 +269,9 @@ namespace GeometryWars_EvaHautecler.States
                         enemiesSpawned += 3;
                         break;
                     case 5:
-                        //enemies.Add(new Boss(level3EnemyTexture, 80f, random, healthBarTexture, EnemyType.Type3));
                         enemies.Add(boss);
                         break;
                 }
-                //enemiesSpawned++;
-                
             }
         }
 
@@ -301,11 +282,9 @@ namespace GeometryWars_EvaHautecler.States
                 enemies.Clear();
                 score = 0;
                 currentLevel++;
-                //maxEnemies = CalculateMaxEnemies(levelThresholds[currentLevel - 1]);
                 enemiesSpawned = 0;
                 transitioning = true;
                 transitionTimer = TransitionDelay;
-                //game.ChangeState(new LevelTransitionState(game, currentLevel));
             }
             else if (currentLevel == 4 && score >= levelThresholds[3])
             {

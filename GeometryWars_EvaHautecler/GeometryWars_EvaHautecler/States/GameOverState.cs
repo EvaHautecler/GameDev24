@@ -29,10 +29,6 @@ namespace GeometryWars_EvaHautecler.States
             bigFont = game.Content.Load<SpriteFont>("BigFont");
         }
 
-        public void Exit()
-        {
-        }
-
         public void Update(GameTime gameTime)
         {
             if (Keyboard.GetState().IsKeyDown(Keys.M))

@@ -101,8 +101,7 @@ namespace GeometryWars_EvaHautecler.Characters
             Vector2 startPosition = new Vector2(spaceshipRectangle.Center.X, spaceshipRectangle.Center.Y);
             startPosition -= new Vector2(spaceshipRectangle.Width / 2, spaceshipRectangle.Height / 2);
 
-            // Initialize the laser with the appropriate height and width
-            Rectangle laserRectangle = new Rectangle((int)startPosition.X, (int)startPosition.Y, 10, 5);  // Adjust height as needed
+            Rectangle laserRectangle = new Rectangle((int)startPosition.X, (int)startPosition.Y, 10, 5);
             laserManager.AddLasers(laserTexture, laserRectangle, direction);
         }
 

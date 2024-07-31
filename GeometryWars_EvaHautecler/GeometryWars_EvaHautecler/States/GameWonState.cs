@@ -29,8 +29,6 @@ namespace GeometryWars_EvaHautecler.States
             font2 = game.Content.Load<SpriteFont>("File");
         }
 
-        public void Exit() { }
-
         public void Update(GameTime gameTime)
         {
             if (Keyboard.GetState().IsKeyDown(Keys.W))
