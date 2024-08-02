@@ -25,6 +25,12 @@
 /processorParam:TextureFormat=Color
 /build:Background.png
 
+#begin BackgroundMusic.wma
+/importer:WmaImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:BackgroundMusic.wma
+
 #begin BigFont.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor

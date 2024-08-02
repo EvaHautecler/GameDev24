@@ -5,13 +5,9 @@ using GeometryWars_EvaHautecler.Manager;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using SharpDX.Direct2D1;
+using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GeometryWars_EvaHautecler.States
 {
@@ -26,6 +22,7 @@ namespace GeometryWars_EvaHautecler.States
         private Texture2D level3EnemyTexture;
         private Texture2D heartTexture;
         private Texture2D healthBarTexture;
+        private Song backgroundMusic;
 
         private Spaceship spaceship;
         private Boss boss;
@@ -75,6 +72,10 @@ namespace GeometryWars_EvaHautecler.States
             heartTexture = game.Content.Load<Texture2D>("Heart");
             font = game.Content.Load<SpriteFont>("File");
 
+            backgroundMusic = game.Content.Load<Song>("BackgroundMusic");
+            MediaPlayer.Play(backgroundMusic);
+            MediaPlayer.IsRepeating = true;
+
             keyboardReader = new KeyboardReader();
             laserManager = new LaserManager();
             spaceship = new Spaceship(spaceshipTexture, spaceshipLaserTexture, keyboardReader);
@@ -93,6 +94,7 @@ namespace GeometryWars_EvaHautecler.States
             if (isGameOver)
             {
                 game.ChangeState(new GameOverState(game));
+                MediaPlayer.Stop();
                 return;
             }
 
@@ -109,6 +111,7 @@ namespace GeometryWars_EvaHautecler.States
             if (score >= levelThresholds[3])
             {
                 game.ChangeState(new GameWonState(game));
+                MediaPlayer.Stop();
                 return;
             }
 

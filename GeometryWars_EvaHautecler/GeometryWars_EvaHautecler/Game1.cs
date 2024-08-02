@@ -25,7 +25,7 @@ namespace GeometryWars_EvaHautecler
             Content.RootDirectory = "Content";
             _graphics.PreferredBackBufferWidth = 2000;
             _graphics.PreferredBackBufferHeight = 988;
-            IsMouseVisible = true;
+            IsMouseVisible = false;
         }
 
         protected override void Initialize()
