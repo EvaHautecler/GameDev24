@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace GeometryWars_EvaHautecler.Characters
 {
-    public class Spaceship : IDraw, IMovable
+    public class Spaceship : IDraw
     {
         private Texture2D spaceshipTexture;
         private Rectangle spaceshipRectangle;
@@ -51,7 +51,7 @@ namespace GeometryWars_EvaHautecler.Characters
             flicker = false;
         }
 
-        public void Update(GameTime gameTime, Vector2 heroPosition)
+        public void Update(GameTime gameTime)
         {
             spaceshipRectangle = keyboardReader.ReadInput(spaceshipRectangle, gameTime);
             animation.Update(gameTime);
