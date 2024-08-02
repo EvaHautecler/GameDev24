@@ -91,7 +91,6 @@ namespace GeometryWars_EvaHautecler.Characters
 
         public void Update(GameTime gameTime, Vector2 heroPosition)
         {
-
             Vector2 enemyPosition = new Vector2(enemyRectangle.X, enemyRectangle.Y);
 
             if (enemyType == EnemyType.Type2)
@@ -113,7 +112,8 @@ namespace GeometryWars_EvaHautecler.Characters
                 directionToHero.Normalize();
                 enemyPosition += directionToHero * speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
-            else if (enemyType == EnemyType.Type1)
+            else 
+            if (enemyType == EnemyType.Type1)
             {
                 enemyPosition += direction * speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
 

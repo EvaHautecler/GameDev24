@@ -1,4 +1,5 @@
 ﻿using GeometryWars_EvaHautecler.Characters;
+using GeometryWars_EvaHautecler.Display;
 using GeometryWars_EvaHautecler.Input;
 using GeometryWars_EvaHautecler.Interface;
 using GeometryWars_EvaHautecler.Manager;
@@ -34,6 +35,7 @@ namespace GeometryWars_EvaHautecler.States
         private int enemiesSpawned;
         private IKeyboardReader keyboardReader;
         private ILaserManager laserManager;
+        private ScoreManager scoreManager;
 
         private bool isGameOver;
         private int score;
@@ -57,6 +59,8 @@ namespace GeometryWars_EvaHautecler.States
             transitioning = false;
             transitionTimer = 0;
 
+            scoreManager = new ScoreManager();
+
             lives = initialLevel == 4 ? maxLives : 1;
         }
 
@@ -75,6 +79,9 @@ namespace GeometryWars_EvaHautecler.States
             backgroundMusic = game.Content.Load<Song>("BackgroundMusic");
             MediaPlayer.Play(backgroundMusic);
             MediaPlayer.IsRepeating = true;
+
+            ScoreDisplay scoreDisplay = new ScoreDisplay(font, new Vector2(10, 10));
+            scoreManager.Attach(scoreDisplay);
 
             keyboardReader = new KeyboardReader();
             laserManager = new LaserManager();
@@ -139,7 +146,8 @@ namespace GeometryWars_EvaHautecler.States
                         {
                             enemiesToRemove.Add(enemy);
                             lasersToRemove.Add(laser);
-                            score += enemy.PointValue;
+                            scoreManager.AddPoints(enemy.PointValue);
+                            //score += enemy.PointValue;
                             break;
                         }
                     }
@@ -179,7 +187,8 @@ namespace GeometryWars_EvaHautecler.States
                         if (boss.IsDefeated)
                         {
                             bossDefeated = true;
-                            score += boss.PointValue;
+                            scoreManager.AddPoints(boss.PointValue);
+                            //score += boss.PointValue;
                         }
                         break;
                     }
@@ -188,6 +197,7 @@ namespace GeometryWars_EvaHautecler.States
                 if (boss.GetRectangle().Intersects(spaceship.GetCollisionRectangle()))
                 {
                     game.ChangeState(new GameOverState(game));
+                    MediaPlayer.Stop();
                 }
             }
              CheckLevelProgression();
@@ -215,8 +225,8 @@ namespace GeometryWars_EvaHautecler.States
                 boss.DrawHealthBar(game.SpriteBatch);
             }
 
-            
-            game.SpriteBatch.DrawString(font, $"Score: {score}", new Vector2(10, 10), Color.White);
+            //scoreManager.Draw(game.SpriteBatch);
+            game.SpriteBatch.DrawString(font, $"Score: {scoreManager.Score}", new Vector2(10, 10), Color.White);
             if (currentLevel == 4 || currentLevel == 5)
             {
                 for (int i = 0; i < lives; i++)
@@ -248,12 +258,14 @@ namespace GeometryWars_EvaHautecler.States
             int enemyCount = 1 + currentLevel;
             for (int i = 0; i < enemyCount ; i++)
             {
+                
+
                 int numberEnemiesToSpawn = (currentLevel == 1 && i == 0) ? 10 : 5;
                 switch (currentLevel)
                 {
                     case 1:
                         
-                        enemies.Add(new Enemy(level1EnemyTexture, 130f, random, 5, EnemyType.Type1));
+                        enemies.Add(new Enemy(level1EnemyTexture, 130f, random,5, EnemyType.Type1));
                         enemiesSpawned++;
                         
                         break;
@@ -280,19 +292,21 @@ namespace GeometryWars_EvaHautecler.States
 
         private void CheckLevelProgression()
         {
-            if (currentLevel < 4 && score >= levelThresholds[currentLevel - 1])
+            if (currentLevel < 4 && scoreManager.Score >= levelThresholds[currentLevel - 1])
             {
                 enemies.Clear();
-                score = 0;
+                scoreManager.Score = 0;
+                //score = 0;
                 currentLevel++;
                 enemiesSpawned = 0;
                 transitioning = true;
                 transitionTimer = TransitionDelay;
             }
-            else if (currentLevel == 4 && score >= levelThresholds[3])
+            else if (currentLevel == 4 && scoreManager.Score >= levelThresholds[3])
             {
                 enemies.Clear();
-                score = 0;
+                scoreManager.Score = 0;
+                //score = 0;
                 currentLevel++;
                 bossDefeated = false;
                 transitioning = true;
