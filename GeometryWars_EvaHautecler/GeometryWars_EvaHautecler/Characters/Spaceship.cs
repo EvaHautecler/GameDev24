@@ -17,13 +17,13 @@ namespace GeometryWars_EvaHautecler.Characters
 {
     public class Spaceship : IDraw
     {
-        private Texture2D spaceshipTexture;
+        private readonly Texture2D spaceshipTexture;
         private Rectangle spaceshipRectangle;
-        private KeyboardReader keyboardReader;
-        private Animation animation;
+        private readonly IKeyboardReader keyboardReader;
+        private readonly Animation animation;
 
-        private Texture2D laserTexture;
-        private LaserManager laserManager;
+        private readonly Texture2D laserTexture;
+        private readonly ILaserManager laserManager;
         private float laserCooldown = 0.25f;
         private float laserTimer;
 
@@ -35,17 +35,18 @@ namespace GeometryWars_EvaHautecler.Characters
         private float flickerTimer;
         private const float flickerInterval = 0.1f;
 
-        public Spaceship(Texture2D spaceshipTexture, Texture2D laserTexture, KeyboardReader keyboardReader)
+        public Spaceship(Texture2D spaceshipTexture, Texture2D laserTexture, IKeyboardReader keyboardReader, ILaserManager laserManager)
         {
             this.spaceshipTexture = spaceshipTexture;
             this.laserTexture = laserTexture;
             this.keyboardReader = keyboardReader;
+            this.laserManager = laserManager;
 
             spaceshipRectangle = new Rectangle(1000, 494, 70, 70);
 
             animation = new Animation();
             animation.GetFramesFromTextureProperties(spaceshipTexture.Width, spaceshipTexture.Height, 1, 1);
-            laserManager = new LaserManager();
+            //laserManager = new LaserManager();
             laserTimer = laserCooldown;
             isInvulnerable = false;
             flicker = false;
@@ -120,7 +121,7 @@ namespace GeometryWars_EvaHautecler.Characters
 
         public Rectangle Rectangle => spaceshipRectangle;
         
-        public LaserManager GetLaserManager()
+        public ILaserManager GetLaserManager()
         {
             return laserManager;
         }

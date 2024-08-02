@@ -32,8 +32,8 @@ namespace GeometryWars_EvaHautecler.States
         private float enemySpawnCooldown = 2.5f;
         private float enemySpawnTimer;
         private int enemiesSpawned;
-        private KeyboardReader keyboardReader;
-        private LaserManager laserManager;
+        private IKeyboardReader keyboardReader;
+        private ILaserManager laserManager;
 
         private bool isGameOver;
         private int score;
@@ -78,7 +78,7 @@ namespace GeometryWars_EvaHautecler.States
 
             keyboardReader = new KeyboardReader();
             laserManager = new LaserManager();
-            spaceship = new Spaceship(spaceshipTexture, spaceshipLaserTexture, keyboardReader);
+            spaceship = new Spaceship(spaceshipTexture, spaceshipLaserTexture, keyboardReader, laserManager);
             random = new Random();
             enemies = new List<Enemy>();
             boss = new Boss(level3EnemyTexture, 200f, random, healthBarTexture);

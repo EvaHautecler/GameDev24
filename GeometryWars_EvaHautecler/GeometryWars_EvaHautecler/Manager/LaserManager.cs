@@ -1,4 +1,5 @@
 ﻿using GeometryWars_EvaHautecler.Characters;
+using GeometryWars_EvaHautecler.Interface;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace GeometryWars_EvaHautecler.Manager
 {
-    public class LaserManager
+    public class LaserManager : ILaserManager
     {
         private List<SpaceshipLaser> lasers = new List<SpaceshipLaser>();
         

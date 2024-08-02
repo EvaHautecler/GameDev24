@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using GeometryWars_EvaHautecler.Interface;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using SharpDX.XInput;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace GeometryWars_EvaHautecler.Input
 {
-    public class KeyboardReader
+    public class KeyboardReader : IKeyboardReader
     {
         private float spaceshipSpeed = 2.5f;
 
