@@ -1,4 +1,5 @@
 ﻿using GeometryWars_EvaHautecler.Input;
+using GeometryWars_EvaHautecler.Interface;
 using GeometryWars_EvaHautecler.Manager;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 namespace GeometryWars_EvaHautecler.Characters
 {
     public enum EnemyType { Type1, Type2, Type3, Type4}
-    public class Enemy
+    public class Enemy : IMovable, IDraw
     {
         private Texture2D enemyTexture;
         private Rectangle enemyRectangle;

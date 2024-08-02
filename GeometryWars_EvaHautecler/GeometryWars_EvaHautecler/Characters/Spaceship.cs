@@ -1,5 +1,6 @@
 ﻿using Game_Development_Space_Shooter.Animaties;
 using GeometryWars_EvaHautecler.Input;
+using GeometryWars_EvaHautecler.Interface;
 using GeometryWars_EvaHautecler.Manager;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
@@ -14,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace GeometryWars_EvaHautecler.Characters
 {
-    public class Spaceship
+    public class Spaceship : IDraw, IMovable
     {
         private Texture2D spaceshipTexture;
         private Rectangle spaceshipRectangle;
@@ -50,7 +51,7 @@ namespace GeometryWars_EvaHautecler.Characters
             flicker = false;
         }
 
-        public void Update(GameTime gameTime)
+        public void Update(GameTime gameTime, Vector2 heroPosition)
         {
             spaceshipRectangle = keyboardReader.ReadInput(spaceshipRectangle, gameTime);
             animation.Update(gameTime);
